@@ -1,11 +1,11 @@
 const students = [
   {
-    name: "Brenya Owusu",
+    name: "Brenya",
     course: "BSc Computer Science",
     year: "Year 3",
     id: "STU2025-001",
     accomodation: "On-Campus - Block A",
-    photo: "https://i.pravatar.cc/150?img=10", // student profile photo
+    photo: "https://i.pravatar.cc/150?img=10", 
     totalBill: "GHS 2,450",
     academicYears: "2022, 2023, 2024"
   }
