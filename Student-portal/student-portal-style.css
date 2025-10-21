@@ -231,6 +231,7 @@ body,
 }
 .Transcript-request-container{
     display: none;
+    
 }
 .Transcript-request {
     position: fixed;
@@ -256,6 +257,9 @@ body,
     z-index: 10000;
     text-align: center;
     font-weight: 600;
+        display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 a {

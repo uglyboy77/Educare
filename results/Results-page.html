@@ -5,18 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Results</title>
-    <link rel="stylesheet" href="EDUCARE/results/Resultts-page-style.css">
+    <link rel="stylesheet" href="Resultts-page-style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 
 <body>
     <div class="info">
         <h1>Results</h1>
-    </div>
-    <div class="back">
-        <a href="EDUCARE/Student-portal/Student-Portal.html">
-            <i class="fas fa-arrow-left">back </i>
-        </a>
     </div>
 
     <div class="coursesbody">
@@ -28,7 +24,7 @@
         </div>
         <div id="results-area"></div>
         <div class="payment-link">
-            <a href="#">Download results <i class="fas fa-download"></i></a>
+            <button id="download-results">Download results <i class="fas fa-download"></i></button>
         </div>
     </div>
     <script>
@@ -41,7 +37,7 @@
                         score: "70%",
                         lecturer: "Dr. Smith",
                         creditHours: 3,
-                        link: "Coursebody.html?id=1"
+                        link: "../course-body/Coursebody.html?id=1"
                     },
                     {
                         grade: "B",
@@ -49,9 +45,9 @@
                         score: "65%",
                         lecturer: "Mr. Kwame Osei",
                         creditHours: 3,
-                        link: "Course(no).html?id=2"
+                        link: "../course-body/Course(no).html?id=2"
                     },
-                    // Add more courses here...
+
                 ],
                 "Semester 2": []
             },
@@ -131,6 +127,35 @@
         }
 
         window.onload = updateDisplay;
+        document.getElementById("download-results").addEventListener("click", () => {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            const year = years[currentYearIndex];
+            const semester = semesters[currentSemesterIndex];
+            const results = resultsData[year]?.[semester];
+
+            doc.setFontSize(16);
+            doc.text(`Results - ${year} ${semester}`, 20, 20);
+
+            if (results && results.length > 0) {
+                let y = 30;
+                results.forEach((result, index) => {
+                    doc.setFontSize(12);
+                    doc.text(`Course ${index + 1}: ${result.courseName}`, 20, y);
+                    doc.text(`Grade: ${result.grade}`, 20, y + 8);
+                    doc.text(`Score: ${result.score}`, 20, y + 16);
+                    doc.text(`Lecturer: ${result.lecturer}`, 20, y + 24);
+                    doc.text(`Credit Hours: ${result.creditHours}`, 20, y + 32);
+                    y += 42;
+                });
+            } else {
+                doc.setFontSize(12);
+                doc.text(`No results available for ${year} ${semester}.`, 20, 30);
+            }
+
+            doc.save(`Results_${year}_${semester}.pdf`);
+        });
     </script>
 </body>
 

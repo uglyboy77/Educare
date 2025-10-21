@@ -1,32 +1,38 @@
 <!DOCTYPE html>
-<html lang="eng">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Student Portal</title>
-    <link rel="stylesheet" href="EDUCARE/Student-portal/student-portal-style.css">
+    <link rel="stylesheet" href="student-portal-style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
 </head>
 
 <body>
     <div class="info">
-        <img src="EDUCARE/assets/R.jpg" class="bgImage">
+        <img src="../assets/R.jpg" class="bgImage">
         <div class="menus" onclick="togglemenuDown(this)">
             <div class="menu"></div>
             <div class="menu"></div>
             <div class="menu"></div>
             <div class="dropdown-menu">
-                <a href="EDUCARE/student-info/Student-Info.html" class="dropdown-item"><i
-                        class="fas fa-user"></i> Student Info</a>
-                <a href="https://www.knust.edu.gh/" class="dropdown-item"><i class="fas fa-school"></i> School Info</a>
-                <a href="EDUCARE/messages/messages.html" class="dropdown-item">
+                <a href="../student-info/Student-Info.html" class="dropdown-item">
+                    <i class="fas fa-user"></i> Student Info
+                </a>
+                <a href="https://www.knust.edu.gh/" class="dropdown-item">
+                    <i class="fas fa-school"></i> School Info
+                </a>
+                <a href="../messages/messages.html" class="dropdown-item">
                     <i class="fas fa-envelope"></i> Messages
                     <span id="unreadCount" class="badge">0</span>
                 </a>
-                <a href="EDUCARE/map/Map.html" class="dropdown-item"><i class="fas fa-map"></i> Map</a>
-                <a href="EDUCARE/index.html" class="dropdown-item"><i
-                        class="fas fa-sign-out-alt"></i> Sign Out</a>
+                <a href="../map/Map.html" class="dropdown-item">
+                    <i class="fas fa-map"></i> Map
+                </a>
+                <a href="../index.html" class="dropdown-item">
+                    <i class="fas fa-sign-out-alt"></i> Sign Out
+                </a>
             </div>
         </div>
         <h2>Hello, [Student Name]</h2>
@@ -43,25 +49,25 @@
 
     <div class="studentBody">
         <div class="studentInfobox1">
-            <a href="EDUCARE/courses/Course.html">
-                <p>courses <i class="fas fa-book"></i></p>
+            <a href="../courses/Course.html">
+                <p>Courses <i class="fas fa-book"></i></p>
             </a>
         </div>
 
         <div class="studentInfobox2">
-            <a href="EDUCARE/BillsandPayments/BillsandPayment.html">
+            <a href="../BillsandPayments/BillsandPayment.html">
                 <p>Bills & <br> Payments <i class="fas fa-money-bill-wave"></i></p>
             </a>
         </div>
 
         <div class="studentInfobox3">
-            <a href="EDUCARE/results/Results-page.html">
+            <a href="../results/Results-page.html">
                 <p>Check Results <i class="fas fa-graduation-cap"></i></p>
             </a>
         </div>
 
         <div class="studentInfobox4">
-            <a href="EDUCARE/registrations/Registration-page.html">
+            <a href="../registrations/Registration-page.html">
                 <p>Registrations <i class="fas fa-check-circle"></i></p>
             </a>
         </div>
@@ -80,11 +86,12 @@
         </div>
 
         <div class="studentInfobox6">
-            <a href="EDUCARE/accesslecturers/AccessLecturers.html">
+            <a href="../accesslecturers/AccessLecturers.html">
                 <p>Access Lecturers <i class="fas fa-chalkboard-teacher"></i></p>
             </a>
         </div>
     </div>
+
     <div class="news">
         <h2 class="news-title">news and announcements</h2>
         <div class="news1 news-item">
@@ -163,7 +170,7 @@
             </div>
         </div>
     </section>
-    <script src="EDUCARE/messages/messages-js.js"></script>
+   <script src="messages/messages-js.js"></script>
 <script>
   function updateBadgeFromStorage() {
     const messages = JSON.parse(localStorage.getItem("messages")) || [];
@@ -221,7 +228,7 @@ function showTranscript() {
 
   if (transcriptContainer && transcriptMsg) {
     transcriptContainer.addEventListener('click', function handler(e) {
-      transcriptMsg.style.display = 'inline-block';
+      transcriptMsg.style.display = 'block';
       setTimeout(function () {
         transcriptMsg.style.display = 'none';
       }, 2000);
@@ -248,8 +255,8 @@ window.addEventListener("load", () => {
     if (img) img.src = savedImage;
   }
 
-  renderMessages();
   showTranscript();
+  renderMessages();
 });
 </script>
 </body>

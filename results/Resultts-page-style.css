@@ -19,22 +19,6 @@ a {
     position: relative;
 }
 
-.back {
-    position: absolute;
-    top: 0;
-    left: 3px;
-    z-index: 5;
-}
-
-.back a {
-    color: #ffffff;
-}
-
-.back a:hover {
-    cursor: pointer;
-    color: #ccc;
-}
-
 .info h1 {
     margin: 35px;
     font-size: 24px;
@@ -117,7 +101,7 @@ p {
     margin-top: 120px;
 }
 
-.navigator button {
+.navigator button, .payment-link button {
     padding: 0.6rem 1.2rem;
     background-color: #0078D4;
     color: white;
@@ -128,7 +112,7 @@ p {
     transition: background-color 0.3s ease;
 }
 
-.navigator button:hover {
+.navigator button:hover, .payment-link button:hover {
     background-color: #005A9E;
 }
 
