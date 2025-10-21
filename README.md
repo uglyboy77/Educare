@@ -58,4 +58,22 @@ A modern, responsive student portal built for school management systems. EDUCARE
 ---
 
 ## 📁 Folder Structure
+EDUCARE/ ├── index.html ├── login/ ├── messages/ ├── results/ ├── bills/ ├── courses/ ├── accesslecturers/ ├── student-info/ ├── map/ ├── assets/ └── README.md
+
+
+---
+
+## 🚀 Getting Started
+
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/uglyboy77/Educare.git
+   - Open index.html in your browser
+- Explore each module via the navigation dashboard
+- 
+  ## 📌 Author
+- Baffour Brenya Agyenim Boateng — passionate about clean UI, robust logic and student-centered design.
+Building EDUCARE to make school systems smarter, smoother and more beautiful.
+
+
 
