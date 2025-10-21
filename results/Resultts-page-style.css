@@ -1,0 +1,161 @@
+body,
+* {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+.info {
+    background-color: #1500ff;
+    color: white;
+    padding: 10px 20px;
+    top: 0;
+    width: 100%;
+    position: relative;
+}
+
+.back {
+    position: absolute;
+    top: 0;
+    left: 3px;
+    z-index: 5;
+}
+
+.back a {
+    color: #ffffff;
+}
+
+.back a:hover {
+    cursor: pointer;
+    color: #ccc;
+}
+
+.info h1 {
+    margin: 35px;
+    font-size: 24px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.coursesbody {
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 20px 20px 0px 0px;
+    border: solid 2px #ffffff;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    z-index: 3;
+}
+
+p {
+    margin: 10px;
+    font-weight: 700;
+}
+
+.results-container {
+    background: linear-gradient(135deg, #ffffff, #f0f4ff);
+    border-left: 6px solid #0078d4;
+    border-right: 6px solid #0078d4;
+    width: 100%;
+    padding: 100px;
+    position: relative;
+    top: 79px;
+    border-radius: 12px;
+    margin-top: 51px;
+}
+
+#grade {
+    position: absolute;
+    font-size: 128px;
+    left: 10px;
+    top: 75px;
+    opacity: 0.3;
+}
+
+#course-name {
+    position: absolute;
+    font-size: 20px;
+    right: 10px;
+    font-weight: 600;
+}
+
+#score {
+    position: absolute;
+    font-size: 96px;
+    top: 0;
+    left: 35%;
+    opacity: 0.1;
+    font-weight: 800;
+}
+
+#lecturer {
+    position: absolute;
+    right: 10px;
+    top: 0;
+}
+
+#credit-hours {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.navigator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 120px;
+}
+
+.navigator button {
+    padding: 0.6rem 1.2rem;
+    background-color: #0078D4;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.navigator button:hover {
+    background-color: #005A9E;
+}
+
+#display {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #0078D4;
+}
+
+.payment-link {
+    position: relative;
+    top: 140px;
+    text-align: center;
+    font-size: 21px;
+    color: #555;
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 25%;
+    margin: 5px;
+    transition: all 1s ease;
+}
+
+.payment-link:hover {
+    background-color: #d9d9d9;
+}
+
+.payment-link a:hover {
+    color: darkblue;
+}

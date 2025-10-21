@@ -1,0 +1,251 @@
+:root {
+    --primary-gradient: linear-gradient(135deg, #00c6ff, #0072ff);
+    --card-bg: rgba(255, 255, 255, 0.1);
+    --text-color: #fff;
+    --accent-color: #00c6ff;
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    --highlight: #ff4081;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.student-background {
+    width: 100%;
+    height: 220px;
+    background: center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+}
+
+.image-container .student-image {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: center/cover no-repeat;
+    border: 4px solid #fff;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+.image-container .student-image:hover {
+    transform: scale(1.05);
+}
+
+.student-info,
+.results-contaienr,
+.bills-container{
+    width: 90%;
+    max-width: 600px;
+    color: #0078d4;
+    background: linear-gradient(135deg, #f9f9f9, #e6ecf5);
+    border: 1px solid #fff;
+    border-radius: 16px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.student-info:hover {
+    transform: translateY(-4px);
+}
+
+.student-info div {
+    margin: 12px 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    position: relative;
+    padding-left: 12px;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.result-box .years,
+.bills-box .total-amount {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #0078d4;
+}
+
+#navigator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+#navigator button {
+    padding: 0.6rem 1.2rem;
+    background-color: #0078D4;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#navigator button:hover {
+    background-color: #005A9E;
+}
+
+#display {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #0078D4;
+}
+
+#results {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+}
+
+#results h3 {
+    margin-top: 0;
+    font-size: 1.4rem;
+    color: #333;
+    border-bottom: 2px solid #0078D4;
+    padding-bottom: 0.5rem;
+}
+
+#results ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0 0;
+}
+
+#results li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #eee;
+    font-size: 1rem;
+}
+
+#results li:last-child {
+    border-bottom: none;
+}
+
+.grade {
+    font-weight: bold;
+    color: #0078D4;
+}
+
+.no-data {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+}
+
+#bill-info {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+}
+
+#bill-info h3 {
+    margin-top: 0;
+    font-size: 1.4rem;
+    color: #333;
+    border-bottom: 2px solid #0078D4;
+    padding-bottom: 0.5rem;
+}
+
+.bill-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+
+.badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+.badge.paid {
+    background-color: #d4f4dd;
+    color: #2e7d32;
+    border: 1px solid #2e7d32;
+}
+
+.badge.owing {
+    background-color: #fdecea;
+    color: #c62828;
+    border: 1px solid #c62828;
+}
+
+a {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #006aff;
+    text-decoration: underline;
+}
+.Transcript-request-container{
+    display: none;
+}
+.Tanscript-request {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: 9999;
+    padding: 20px;
+}
+
+.Tanscript-request .dialog {
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 50%;
+    width: 480px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    transform: none;
+    position: relative;
+    z-index: 10000;
+    text-align: center;
+    font-weight: 600;
+}
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

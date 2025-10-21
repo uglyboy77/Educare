@@ -1,0 +1,288 @@
+body,
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.course-details {
+  background: linear-gradient(135deg, #f9f9f9, #e6ecf5);
+  border: 1px solid #d0d0d0;
+  border-radius: 16px;
+  padding: 20px;
+  margin: 30px auto;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 120, 212, 0.1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.image-wrapper {
+  position: absolute;
+  transform: translateY(50%);
+  left: 20px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 2px solid #0078d4;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+#lecturer-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+#course-title {
+  font-size: 22px;
+  color: #0078d4;
+  margin-top: 60px;
+  margin-bottom: 10px;
+  text-align: right;
+}
+
+.course-details p {
+  font-size: 14px;
+  margin: 6px 0;
+  text-align: right;
+  color: #333;
+}
+
+.course-details p strong {
+  color: #0078d4;
+  font-weight: bold;
+}
+
+#course-time {
+  color: #0078d4;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#course-time:hover{
+    color: #01599c;
+}
+
+#course-note {
+  background-color: #0078d4;
+  color: white;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-top: 10px;
+  align-self: flex-end;
+  text-align: center;
+  max-width: 200px;
+}
+
+@media screen and (max-width: 600px) {
+  .course-details {
+    padding: 16px;
+    max-width: 90%;
+    align-items: center;
+  }
+
+  .course-details p,
+  #course-title {
+    text-align: center;
+  }
+
+  .image-wrapper {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    top: -20px;
+  }
+
+  #course-note {
+    align-self: center;
+  }
+}
+
+#student-message {
+  width: 100%;
+  max-width: 500px;
+  min-height: 120px;
+  padding: 14px 16px;
+  font-size: 15px;
+  font-family: 'Segoe UI', sans-serif;
+  border: 1.5px solid #d0d0d0;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  resize: vertical;
+  margin: 20px auto;
+  display: block;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#student-message:focus {
+  outline: none;
+  border-color: #0078d4;
+  box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.2);
+}
+
+#student-message::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+#activity-area {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 10px;
+  scrollbar-width: none;
+
+}
+
+.Activity-box {
+    background: linear-gradient(135deg, #ffffff, #f0f4ff);
+    border-left: 6px solid #0078d4;
+    border-radius: 12px;
+    min-width: 280px;
+    min-height: 180px;
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 120, 212, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.Activity-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 16px rgba(0, 120, 212, 0.2);
+}
+
+.Activity-box h2 {
+  font-size: 18px;
+  color: #0078d4;
+  margin-bottom: 10px;
+}
+
+.Activity-box p {
+  font-size: 14px;
+  color: #333;
+  margin: 6px 0;
+}
+
+.Activity-box p strong {
+  color: #0078d4;
+}
+.activity-badge {
+  background-color: #0078d4;
+  color: white;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 20px;
+  align-self: flex-start;
+  margin-bottom: 10px;
+}
+
+.no-activity-message {
+    font-size: 16px;
+    color: #555;
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 100%;
+}
+
+#course-materials a{
+    text-align: center;
+    font-size: 18px;
+}
+#course-materials a:hover{
+   color: darkblue;
+}
+
+.calendar-container {
+  background: linear-gradient(135deg, #ffffff, #f0f4ff);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 120, 212, 0.1);
+  padding: 24px;
+  max-width: 400px;
+  margin: 40px auto;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.calendar-header h2 {
+  font-size: 20px;
+  color: #0078d4;
+  margin: 0;
+}
+
+.calendar-header button {
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.calendar-header button:hover {
+  background-color: #005fa3;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.calendar-dates {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.calendar-dates div {
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.calendar-dates div:hover {
+  background-color: #e0e0e0;
+}
+
+.today {
+  background-color: #0078d4;
+  color:#0078d4;
+  font-weight: bold;
+}
+
+.event-day {
+  color: #ffcc00;
+  font-weight: bold;
+  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+
+}

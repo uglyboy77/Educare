@@ -1,0 +1,423 @@
+body,
+* {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.info {
+    background-color: #1500ff;
+    color: white;
+    padding: 10px 20px;
+    top: 0;
+}
+
+.bgImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 0.1;
+}
+
+.menu {
+    height: 3px;
+    width: 30px;
+    margin: 3px;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+    z-index: 2;
+}
+
+.menus {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    border: solid 2px white;
+    padding: 6px;
+    border-radius: 6px;
+    z-index: 2;
+}
+
+.menus:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.menus.active .menu:nth-child(1) {
+    transform: rotate(45deg) translate(4px, 4px);
+    background-color: rgb(250, 248, 248);
+}
+
+.menus.active .menu:nth-child(2) {
+    opacity: 0;
+}
+
+.menus.active .menu:nth-child(3) {
+    transform: rotate(-45deg) translate(4px, -4px);
+    background-color: rgb(254, 254, 253);
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    z-index: 100;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background 0.2s;
+}
+
+.dropdown-item i {
+    margin-right: 8px;
+}
+
+.dropdown-item:hover {
+    background: #f0f0f0;
+}
+
+.badge {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.imageWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #ccc;
+    margin-top: 50px;
+    border-radius: 50%;
+    background-color: #d9d9d9;
+    position: relative;
+    cursor: pointer;
+    transition: box-shadow 0.3s, transform 0.3s;
+    z-index: 2;
+}
+
+.imageWrapper:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+.userImage {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.fa-camera {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.camera-upload input[type="file"] {
+    display: none;
+}
+
+.camera-upload:hover .fa-camera {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.studentBody {
+    background-color: white;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.studentInfobox1,
+.studentInfobox2,
+.studentInfobox3,
+.studentInfobox4,
+.studentInfobox5,
+.studentInfobox6 {
+    position: relative;
+    top: 62px;
+    width: 148px;
+    height: 148px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-left: 10px;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    z-index: 2;
+}
+
+.studentInfobox1:hover,
+.studentInfobox2:hover,
+.studentInfobox3:hover,
+.studentInfobox4:hover,
+.studentInfobox5:hover,
+.studentInfobox6:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+.studentInfobox1 p,
+.studentInfobox2 p,
+.studentInfobox3 p,
+.studentInfobox4 p,
+.studentInfobox5 p,
+.studentInfobox6 p {
+    font-size: 18px;
+    margin: 60px auto;
+}
+
+.studentInfobox1 p:hover,
+.studentInfobox2 p:hover,
+.studentInfobox3 p:hover,
+.studentInfobox4 p:hover,
+.studentInfobox5 p:hover,
+.studentInfobox6 p:hover {
+    color: #1500ff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.studentInfobox1 {
+    background-color: #ffb6c1;
+}
+
+.studentInfobox2 {
+    background-color: #ffcccb;
+}
+
+.studentInfobox3 {
+    background-color: #d1e7dd;
+}
+
+.studentInfobox4 {
+    background-color: #f8d7da;
+}
+
+.studentInfobox5 {
+    background-color: #fff3cd;
+}
+
+.studentInfobox6 {
+    background-color: #cfe2ff;
+}
+.Transcript-request-container{
+    display: none;
+}
+.Transcript-request {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: 9999;
+    padding: 20px;
+}
+
+.Transcript-request .dialog {
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 50%;
+    width: 480px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    transform: none;
+    position: relative;
+    z-index: 10000;
+    text-align: center;
+    font-weight: 600;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.news {
+    margin: 20px auto;
+    position: relative;
+    top: 80px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 22px;
+    background-color: #ffffff;
+    width: 80%;
+    animation: Up 10s infinite;
+}
+
+@keyframes Up {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.newsImage {
+    display: block;
+    margin: 10px auto;
+    height: 100px;
+    width: 100px;
+    height: auto;
+    border-radius: 12px;
+}
+
+.news,
+.news h2 {
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.news h2 {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.news2 {
+    display: none;
+}
+
+.FAQ {
+    margin: 10px;
+    position: relative;
+    top: 80px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 22px;
+    background-color: #d9d9d9;
+    width: 25%;
+    transition: all 0.3s ease;
+}
+
+.FAQ:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+.FAQ h2 {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 20px;
+    text-decoration: double underline;
+}
+
+@media (max-width: 600px) {
+    .FAQ {
+        display: block;
+        width: 55%;
+        margin: 10px;
+        margin-top: 10px;
+    }
+
+    .FAQ h2 {
+        font-size: 18px;
+    }
+
+}
+
+.FAQ-item {
+    margin-bottom: 15px;
+}
+
+.FAQ-question {
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.FAQ-answer {
+    margin-left: 20px;
+    font-size: 8px;
+}
+
+.sendMessage {
+    margin: 20px auto;
+    position: relative;
+    top: 80px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 22px;
+    background-color: #ffffff;
+    width: 50%;
+}
+
+.sendMessage h2 {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.sendMessage textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: vertical;
+    margin-bottom: 15px;
+}
+
+.sendMessage button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #1500ff;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sendMessage input {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    background-color: rgba(217, 217, 217, 0.2);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.sendMessage button:hover {
+    background-color: #ff69b4;
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Messages</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="EDUCARE/messages/messages-style.css" />
+</head>
+
+<body>
+  <header class="header">
+    <h1><i class="fas fa-envelope-open-text"></i> Messages</h1>
+    <a href="EDUCARE/Student-portal/Student-Portal.html" class="back-btn"><i class="fas fa-arrow-left"></i>
+      Back</a>
+  </header>
+
+  <section class="compose-panel">
+    <h2>Send a Message</h2>
+    <form id="messageForm">
+      <input type="number" id="recipientId" placeholder="Recipient Student ID" required />
+      <textarea id="messageText" placeholder="Type your message..." required></textarea>
+      <button type="submit"><i class="fas fa-paper-plane"></i> Send</button>
+    </form>
+  </section>
+  <div class="message-controls">
+    <button onclick="markAllAsRead()" class="control-btn"><i class="fas fa-check-double"></i> Mark All as Read</button>
+    <button onclick="showHiddenMessages()" class="control-btn" id="showHiddenBtn"><i class="fas fa-trash"></i> Delete</button>
+    <input type="text" id="searchInput" placeholder="Search messages..." oninput="searchMessages()" />
+    <button id="inboxBtn" class="control-btn">Inbox</button>
+  </div>
+  <section class="message-panel">
+    <h2>Inbox</h2>
+    <ul id="messageList" class="message-list"></ul>
+  </section>
+  <div id="toast" class="toast hidden">Message sent successfully!</div>
+  <!-- 💬 Modal Popup -->
+  <div id="messageModal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h3 id="modalSubject"></h3>
+      <p id="modalBody"></p>
+      <span class="meta" id="modalMeta"></span>
+
+      <form id="replyForm">
+        <textarea id="replyText" placeholder="Type your reply..." required></textarea>
+        <button type="submit"><i class="fas fa-reply"></i> Send Reply</button>
+      </form>
+    </div>
+
+  </div>
+
+  <script src="EDUCARE/messages/messages-js.js"></script>
+</body>
+
+</html>

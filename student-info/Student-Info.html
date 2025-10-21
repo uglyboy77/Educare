@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student-Info</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="EDUCARE/student-info/Student-info-style.css">
+</head>
+
+<body>
+    <div class="student-background">
+        <div class="image-container">
+            <div class="student-image"></div>
+        </div>
+    </div>
+    <div class="student-info">
+        <div id="student-name"></div>
+        <div id="student-course"></div>
+        <div id="student-year"></div>
+        <div id="student-id"></div>
+        <div id="student-accomodation"></div>
+    </div>
+
+    <div class="student-info">
+        <div id="navigator">
+            <button onclick="goPrevious()">Previous</button>
+            <span id="display">Year 1 - Semester 1</span>
+            <button onclick="goNext()">Next</button>
+        </div>
+        <div id="results"></div>
+        <a href="EDUCARE/results/Results-page.html">Downlaod all results <i
+                class="fas fa-download"></i></a>
+    </div>
+    <div class="bills-container">
+        <div id="navigator">
+            <button onclick="goPreviousBill()">Previous</button>
+            <span id="display"></span>
+            <button onclick="goNextBill()">Next</button>
+        </div>
+
+        <div id="bill-info"></div>
+        <a href="EDUCARE/BillsandPayments/BillsandPayment.html">view all</a>
+    </div>
+
+    </div>
+    <div class="requests">
+        <div class="Transcript-container">
+            <a href="#">Request for Transcript <i class="fas fa-file-alt"></i></a>
+              <div class="Transcript-request-container">
+                <div class="Transcript-request">
+                    <div class="Tanscript-request">
+                        <div class="dialog">Transcript requested!<br> Come back in 72 hours later.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <a href="EDUCARE/accesslecturers/AccessLecturers.html">Access Lecturers <i class="fas fa-chalkboard-teacher"></i></a>
+    </div>
+
+    <script src="EDUCARE/student-info/Student-info-JS.js"></script>
+</body>
+
+</html>

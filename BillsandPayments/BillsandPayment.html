@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bills and Payments</title>
+    <link rel="stylesheet" href="EDUCARE/BillsandPayments/BillsandPayment-style.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="info">
+        <h1>Bills & <br> Payments</h1>
+    </div>
+    <div class="back">
+        <a href="EDUCARE/Student-portal/Student-Portal.html">
+            <i class="fas fa-arrow-left">back </i>
+        </a>
+    </div>
+
+    <div class="coursesbody">
+        <div class="navigator">
+            <button onclick="goPrevious()">Previous</button>
+            <span id="display">Year 1 - Semester 1</span>
+            <button onclick="goNext()">Next</button>
+        </div>
+        <div id="bill-area"></div>
+
+    </div>
+    <script>
+        const billData = {
+            "Year 1": {
+                "Semester 1": {
+                    total: -1010.77,
+                    items: [
+                        { label: "Accommodation", amount: -100.77 },
+                        { label: "Extra Activities", amount: -100.77 },
+                        { label: "Teacher's Compensation", amount: 0.00 }
+                    ]
+                },
+                "Semester 2": null // No bill data yet
+            },
+            "Year 2": {
+                "Semester 1": null,
+                "Semester 2": null
+            },
+            "Year 3": {
+                "Semester 1": null,
+                "Semester 2": null
+            },
+            "Year 4": {
+                "Semester 1": null,
+                "Semester 2": null
+            }
+        };
+        const years = ["Year 1", "Year 2", "Year 3", "Year 4"];
+        const semesters = ["Semester 1", "Semester 2"];
+        let currentYearIndex = 0;
+        let currentSemesterIndex = 0;
+
+        function updateDisplay() {
+            const display = document.getElementById("display");
+            const billArea = document.getElementById("bill-area");
+            const year = years[currentYearIndex];
+            const semester = semesters[currentSemesterIndex];
+
+            display.textContent = `${year} - ${semester}`;
+
+            const bill = billData[year]?.[semester];
+
+            if (bill) {
+                billArea.innerHTML = `
+      <div class="payment-container">
+        <div class="payment-statement"><h5>Total amount you owe:</h5></div>
+        <div class="bill">GHS ${bill.total.toFixed(2)}</div>
+      </div>
+      ${bill.items.map(item => `
+        <div class="payment-container1">
+          <div class="payment-statement"><h5>${item.label}:</h5></div>
+          <div class="${item.amount === 0 ? 'bill-1' : 'bill'}">GHS ${item.amount.toFixed(2)}</div>
+        </div>
+      `).join("")}
+      <div class="payment-link">
+        <a href="#">CLICK HERE TO PAY YOUR BILLS</a>
+      </div>
+    `;
+            } else {
+                billArea.innerHTML = `
+      <div class="payment-container">
+        <p style="text-align:center; font-size:18px; font-weight:bold; color:#999;">
+          No billing data available for ${year} ${semester}.
+        </p>
+      </div>
+    `;
+            }
+        }
+
+        function goNext() {
+            currentSemesterIndex++;
+            if (currentSemesterIndex >= semesters.length) {
+                currentSemesterIndex = 0;
+                currentYearIndex++;
+                if (currentYearIndex >= years.length) {
+                    currentYearIndex = 0;
+                }
+            }
+            updateDisplay();
+        }
+
+        function goPrevious() {
+            currentSemesterIndex--;
+            if (currentSemesterIndex < 0) {
+                currentSemesterIndex = semesters.length - 1;
+                currentYearIndex--;
+                if (currentYearIndex < 0) {
+                    currentYearIndex = years.length - 1;
+                }
+            }
+            updateDisplay();
+        }
+
+        window.onload = updateDisplay;
+    </script>
+</body>
+
+</html>

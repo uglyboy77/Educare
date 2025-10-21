@@ -1,0 +1,116 @@
+body,
+* {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+}
+.info {
+    background-color: #1500ff;
+    color: white;
+    padding: 10px 20px;
+    top: 0;
+    width: 100%;
+    position: relative;
+}
+.back{
+    position: absolute;
+    top: 0;
+    left: 3px;
+    z-index: 5;
+}
+.back a{
+    color: #ffffff;
+}
+.back a:hover{
+    cursor: pointer;
+    color: #ccc;
+}
+.info h1 {
+    margin: 35px;
+    font-size: 24px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.coursesbody {
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 20px 20px 0px 0px;
+    border: solid 2px #ffffff;
+    position: absolute;
+    top: 120px;
+    left: 0;
+    right: 0;
+    z-index: 3;
+}
+.navigator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 140px;
+}
+.navigator button {
+  padding: 0.6rem 1.2rem;
+  background-color: #0078D4;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.navigator button:hover {
+  background-color: #005A9E;
+}
+#display {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #0078D4;
+}
+.payment-container, .payment-container2{
+    background: linear-gradient(135deg, #ffffff, #f0f4ff);
+    border-right: 6px solid #0078d4;
+    width: 100%;
+    padding: 70px;
+    position: relative;
+    top:79px;
+    border-radius: 12px;
+}
+.payment-container1, .payment-container2{
+    background: linear-gradient(135deg, #ffffff, #f0f4ff);
+    border-left: 6px solid #0078d4;
+    width: 100%;
+    padding: 70px;
+    position: relative;
+    top:79px;
+    border-radius: 12px;
+    margin-top: 51px;
+}
+.payment-statement h5{
+    position: absolute;
+    left: 5px;
+    top: 30px;
+    font-size: large;
+}
+.bill, .bill-1{
+    position: absolute;
+    right: 5px;
+    bottom: 0;
+    font-size: large;
+    color: red;
+    font-weight: bold;
+}
+.bill-1{
+    color: #0078d4;
+}
+.payment-link{
+    position: relative;
+    top: 150px;
+    text-align: center;
+}

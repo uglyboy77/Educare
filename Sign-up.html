@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIGN-UP</title>
+    <link rel="stylesheet" href="EDUCARE/CSS.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+    <div class="background">
+        <div class="LogIn-container">
+            <div class="logo">
+                <img src="EDUCARE/assets/EduCare Logo.png" alt="EDUCARE Logo" class="image1">
+            </div>
+            <h1>Welcome to EDUCARE</h1>
+            <h2>SIGN UP</h2>
+            <form action="EDUCARE/Student-portal/Student-Portal.html" method="post">
+             
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="firstname" name="firstname" placeholder="First Name" required />
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="lastname" name="lastname" placeholder="Last Name" required />
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-user-plus"></i>
+                        <input type="text" id="othernames" name="othernames" placeholder="Other Names" />
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="username" name="username" placeholder="Email" required />
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-phone"></i>
+                        <input type="number" id="phone" name="phone" placeholder="Phone Number" required />
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-id-card"></i>
+                        <input type="number" id="id" name="id" placeholder="ID" required />
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Password" required />
+                        <i class="fas fa-eye toggle-password" onclick="togglePassword()"></i>
+                    </div><br><br>
+                    <button type="submit">Sign Up</button>
+            </form>
+            <p>Already have an account? <a href="EDUCARE/index.html">Log In</a></p>
+            <footer>
+                <p>&copy; 2025 EDUCARE. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById("password");
+            const toggleIcon = document.querySelector(".toggle-password");
+            const isVisible = passwordInput.type === "text";
+            passwordInput.type = isVisible ? "password" : "text";
+            toggleIcon.classList.toggle("fa-eye");
+            toggleIcon.classList.toggle("fa-eye-slash");
+        }
+    </script>
+</body>
+
+</html>
