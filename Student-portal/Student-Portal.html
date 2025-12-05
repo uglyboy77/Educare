@@ -2,256 +2,234 @@
 <html lang="eng">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Student Portal</title>
-    <link rel="stylesheet" href="EDUCARE/Student-portal/student-portal-style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Portal</title>
+  <link rel="icon" type="image/png" href="../assets/EduCare Logo.png" />
+  <link rel="stylesheet" href="student-portal-style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div class="info">
-        <img src="EDUCARE/assets/R.jpg" class="bgImage">
-        <div class="menus" onclick="togglemenuDown(this)">
-            <div class="menu"></div>
-            <div class="menu"></div>
-            <div class="menu"></div>
-            <div class="dropdown-menu">
-                <a href="EDUCARE/student-info/Student-Info.html" class="dropdown-item"><i
-                        class="fas fa-user"></i> Student Info</a>
-                <a href="https://www.knust.edu.gh/" class="dropdown-item"><i class="fas fa-school"></i> School Info</a>
-                <a href="EDUCARE/messages/messages.html" class="dropdown-item">
-                    <i class="fas fa-envelope"></i> Messages
-                    <span id="unreadCount" class="badge">0</span>
-                </a>
-                <a href="EDUCARE/map/Map.html" class="dropdown-item"><i class="fas fa-map"></i> Map</a>
-                <a href="EDUCARE/index.html" class="dropdown-item"><i
-                        class="fas fa-sign-out-alt"></i> Sign Out</a>
-            </div>
-        </div>
-        <h2>Hello, [Student Name]</h2>
-        <div class="imagecontainer">
-            <div class="imageWrapper">
-                <img id="img" src="" alt="upload photo" class="userImage">
-                <label class="camera-upload">
-                    <i class="fas fa-camera"></i>
-                    <input type="file" accept="image/*" onchange="saveImage(event)">
-                </label>
-            </div>
-        </div>
+  <div class="info">
+    <img src="../assets/R.jpg" class="bgImage">
+    <div class="menus" onclick="togglemenuDown(this)">
+      <div class="menu"></div>
+      <div class="menu"></div>
+      <div class="menu"></div>
+      <div class="dropdown-menu">
+        <a href="../student-info/Student-Info.html" class="dropdown-item"><i class="fas fa-user"></i> Student Info</a>
+        <a href="https://www.knust.edu.gh/" class="dropdown-item"><i class="fas fa-school"></i> School Info</a>
+        <a href="../messages/messages.html" class="dropdown-item">
+          <i class="fas fa-envelope"></i> Messages
+          <!--  <span id="unreadCount" class="badge"></span> -->
+        </a>
+        <a href="../map/Map.html" class="dropdown-item"><i class="fas fa-map"></i> Map</a>
+        <a href="../index.html" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+      </div>
+    </div>
+    <h2 id="student-name"></h2>
+    <div class="imagecontainer">
+      <div class="imageWrapper">
+        <img id="img" src="" alt="upload photo" class="userImage">
+      </div>
+    </div>
+  </div>
+
+  <div class="studentBody">
+    <div class="studentInfobox1">
+      <a href="../courses/Course.html">
+        <p>courses <i class="fas fa-book"></i></p>
+      </a>
     </div>
 
-    <div class="studentBody">
-        <div class="studentInfobox1">
-            <a href="EDUCARE/courses/Course.html">
-                <p>courses <i class="fas fa-book"></i></p>
-            </a>
-        </div>
-
-        <div class="studentInfobox2">
-            <a href="EDUCARE/BillsandPayments/BillsandPayment.html">
-                <p>Bills & <br> Payments <i class="fas fa-money-bill-wave"></i></p>
-            </a>
-        </div>
-
-        <div class="studentInfobox3">
-            <a href="EDUCARE/results/Results-page.html">
-                <p>Check Results <i class="fas fa-graduation-cap"></i></p>
-            </a>
-        </div>
-
-        <div class="studentInfobox4">
-            <a href="EDUCARE/registrations/Registration-page.html">
-                <p>Registrations <i class="fas fa-check-circle"></i></p>
-            </a>
-        </div>
-
-        <div class="Transcript-container">
-            <div class="studentInfobox5">
-                <p>Transcript <br> Request <i class="fas fa-file-alt"></i></p>
-            </div>
-            <div class="Transcript-request-container">
-                <div class="Transcript-request">
-                    <div class="Tanscript-request">
-                        <div class="dialog">Transcript requested!<br> Come back in 72 hours later.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="studentInfobox6">
-            <a href="EDUCARE/accesslecturers/AccessLecturers.html">
-                <p>Access Lecturers <i class="fas fa-chalkboard-teacher"></i></p>
-            </a>
-        </div>
+    <div class="studentInfobox2">
+      <a href="../BillsandPayments/BillsandPayment.html">
+        <p>Bills & <br> Payments <i class="fas fa-money-bill-wave"></i></p>
+      </a>
     </div>
-    <div class="news">
-        <h2 class="news-title">news and announcements</h2>
-        <div class="news1 news-item">
-            <img src="" alt="newsphoto" class="newsImage news-img">
-            <p class="news-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Nullam scelerisque aliquam odio et faucibus. Nulla rhoncus feugiat eros quis consectetur.
-                Morbi neque ex, condimentum dapibus congue et, vulputate ut ligula. Vestibulum sit amet urna turpis.
-                Mauris euismod elit et nisi ultrices, ut faucibus orci tincidunt.
-                Mauris et velit in erat fringilla viverra a nec massa.
-                Quisque pulvinar, nunc sit amet varius dignissim, nunc est aliquet nisi, quis tincidunt nisi risus in
-                nunc.
-                Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                In convallis felis nec magna efficitur, a eleifend lectus fringilla. Donec lacinia congue felis in
-                faucibus.
-            </p>
-            <p class="news-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolorem
-                laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae
-                vitae dicta sunt explicabo.
-                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
-                dolores eos qui ratione voluptatem sequi nesciunt.
-                Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia
-                non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-                Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut
-                aliquid ex ea commodi consequatur?
-                Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur,
-                vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-            </p>
-        </div>
-        <br>
-        <div class="news2 news-item">
-            <img src="" alt="newsphoto" class="newsImage news-img">
-            <p class="news-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Nullam scelerisque aliquam odio et faucibus. Nulla rhoncus feugiat eros quis consectetur.
-                Morbi neque ex, condimentum dapibus congue et, vulputate ut ligula. Vestibulum sit amet urna turpis.
-                Mauris euismod elit et nisi ultrices, ut faucibus orci tincidunt.
-                Mauris et velit in erat fringilla viverra a nec massa.
-                Quisque pulvinar, nunc sit amet varius dignissim, nunc est aliquet nisi, quis tincidunt nisi risus in
-                nunc.
-                Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                In convallis felis nec magna efficitur, a eleifend lectus fringilla. Donec lacinia congue felis in
-                faucibus.
-            </p>
-        </div>
+
+    <div class="studentInfobox3">
+      <a href="../results/Results-page.html">
+        <p>Check Results <i class="fas fa-graduation-cap"></i></p>
+      </a>
     </div>
-    <div class="FAQ">
-        <h2 class="FAQ-title">Frequently Asked Questions (FAQs)</h2>
-        <div class="FAQ-item">
-            <h3 class="FAQ-question">How do I reset my password?</h3>
-            <p class="FAQ-answer">To reset your password, click on the "Forgot Password" link on the login page and
-                follow the instructions.</p>
-        </div>
-        <div class="FAQ-item">
-            <h3 class="FAQ-question">How can I view my grades?</h3>
-            <p class="FAQ-answer">You can view your grades by logging into your student portal and navigating to the
-                "Grades" section.</p>
-        </div>
-        <div class="FAQ-item">
-            <h3 class="FAQ-question">Where can I find the academic calendar?</h3>
-            <p class="FAQ-answer">The academic calendar is available on the university's official website under the
-                "Academics" section.</p>
-        </div>
+
+    <div class="studentInfobox4">
+      <a href="../registrations/Registration-page.html">
+        <p>Registrations <i class="fas fa-check-circle"></i></p>
+      </a>
     </div>
-    <section>
-        <div class="sendMessage">
-            <h2 class="sendMessage-title">Send us a message</h2>
-            <form action="/send-message" method="post" class="message-form" onsubmit="showCongrats(event)">
-                <input type="text" id="name" name="name" placeholder="Your Name" required class="message-input"><br><br>
-                <input type="email" id="email" name="email" placeholder="Your Email" required
-                    class="message-input"><br><br>
-                <textarea id="message" name="message" placeholder="Your Message" required
-                    class="message-textarea"></textarea><br><br>
-                <button type="submit" class="message-button">Send Message <i class="fa fa-paper-plane"></i></button>
-            </form>
-            <div id="congrats-message" style="display:none; color:green; font-weight:bold; margin-top:10px;">
-                Congratulations! Your message has been sent.
-            </div>
+
+    <div class="Transcript-container">
+      <div class="studentInfobox5">
+        <p>Transcript <br> Request <i class="fas fa-file-alt"></i></p>
+      </div>
+      <div class="Transcript-request-container">
+        <div class="Transcript-request">
+          <div class="Tanscript-request">
+            <div class="dialog">Transcript requested!<br> Come back in 72 hours later.</div>
+          </div>
         </div>
-    </section>
-    <script src="EDUCARE/messages/messages-js.js"></script>
-<script>
-  function updateBadgeFromStorage() {
-    const messages = JSON.parse(localStorage.getItem("messages")) || [];
-    const count = messages.filter(msg => msg.unread).length;
-    const badge = document.getElementById("unreadCount");
-    if (badge) {
-      badge.textContent = count;
-      badge.style.display = count > 0 ? "inline-block" : "none";
-    }
-  }
+      </div>
+    </div>
 
-  // Initial load
-  window.addEventListener("load", updateBadgeFromStorage);
+    <div class="studentInfobox6">
+      <a href="../accesslecturers/AccessLecturers.html">
+        <p>Access Lecturers <i class="fas fa-chalkboard-teacher"></i></p>
+      </a>
+    </div>
+  </div>
+  <div class="news">
+    <h2 class="news-title">news and announcements</h2>
+    <div class="news1 news-item">
+      <img src="" alt="newsphoto" class="newsImage news-img">
+      <p class="news-text"><strong>Latest News will appear here.</strong></p>
+    </div>
+  </div>
+  <div class="FAQ">
+    <h2 class="FAQ-title">Frequently Asked Questions (FAQs)</h2>
+    <div class="FAQ-item">
+      <h3 class="FAQ-question">How do I register a course?</h3>
+      <p class="FAQ-answer">To register a course, log into your student portal, navigate to the "Course" section and
+        follow the instructions provided.</p>
+    </div>
+    <div class="FAQ-item">
+      <h3 class="FAQ-question">How can I view my grades?</h3>
+      <p class="FAQ-answer">You can view your grades by logging into your student portal and navigating to the
+        "Check Results" page.</p>
+    </div>
+    <div class="FAQ-item">
+      <h3 class="FAQ-question">Where can I find the academic calendar?</h3>
+      <p class="FAQ-answer">The academic calendar is available on the university's official website under the
+        "Academics" section.</p>
+    </div>
+  </div>
+  <section>
+    <div class="sendMessage">
+      <h2 class="sendMessage-title">Send us a message</h2>
+      <form id="feedbackForm" class="message-form">
+        <input type="text" id="name" name="name" placeholder="Your Name" required class="message-input"><br><br>
+        <input type="email" id="email" name="email" placeholder="Your Email" required class="message-input"><br><br>
+        <textarea id="message" name="message" placeholder="Your Message" required
+          class="message-textarea"></textarea><br><br>
+        <button type="submit" class="message-button">Send Message <i class="fa fa-paper-plane"></i></button>
+      </form>
 
-  // Listen for changes from other tabs/pages
-  window.addEventListener("storage", (event) => {
-    if (event.key === "messages") {
-      updateBadgeFromStorage();
-    }
-  });
+      <div id="congrats-message" style="display:none; color:green; font-weight:bold; margin-top:10px;">
+        Thank you! We've received your feedback.
+      </div>
+    </div>
+  </section>
+  <!-- <script src="messages/messages-js.js"></script> -->
+  <script>
 
-  function togglemenuDown(element) {
-  const menu = element.querySelector('.dropdown-menu');
-  menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
-  element.classList.toggle('active');
-  document.addEventListener('click', function handler(e) {
-    if (!element.contains(e.target)) {
-      menu.style.display = 'none';
-      element.classList.remove('active');
-      document.removeEventListener('click', handler);
-    }
-  });
-}
+    window.addEventListener("load", () => {
+      const studentId = localStorage.getItem("studentId");
+      if (!studentId) return;
 
-// Image upload
-function saveImage(event) {
-  const file = event.target.files[0];
-  const reader = new FileReader();
+      fetch(`http://localhost:3000/student-info/${studentId}`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("student-name").textContent = `Hello, ${data.name}`;
+          if (data.image) {
+            document.getElementById("img").src = `http://localhost:3000${data.image}`;
+          } else {
+            document.getElementById("img").removeAttribute("src");
+            document.getElementById("img").alt = "No photo uploaded";
+          }
+        })
+        .catch(err => console.error("❌ Failed to load student info:", err));
 
-  reader.onload = function (e) {
-    const imageData = e.target.result;
-    document.getElementById('img').src = imageData;
-    localStorage.setItem('uploadedImage', imageData);
-  };
-
-  if (file) {
-    reader.readAsDataURL(file);
-  }
-}
-
-// Transcript message
-function showTranscript() {
-  const transcriptMsg = document.querySelector(".Transcript-request-container");
-  const transcriptContainer = document.querySelector(".Transcript-container");
-
-  if (transcriptContainer && transcriptMsg) {
-    transcriptContainer.addEventListener('click', function handler(e) {
-      transcriptMsg.style.display = 'inline-block';
-      setTimeout(function () {
-        transcriptMsg.style.display = 'none';
-      }, 2000);
+      renderMessages();
+      showTranscript();
     });
-  }
-}
 
-// Congrats message
-function showCongrats(e) {
-  e.preventDefault();
-  const form = document.querySelector('.message-form');
-  const congrats = document.getElementById('congrats-message');
-  if (form && congrats) {
-    form.style.display = 'none';
-    congrats.style.display = 'block';
-  }
-}
+    /* 
+    window.addEventListener("load", updateBadgeFromStorage);
+    window.addEventListener("storage", (event) => {
+      if (event.key === "messages") {
+        updateBadgeFromStorage();
+      }
+    }); */
 
-// On load
-window.addEventListener("load", () => {
-  const savedImage = localStorage.getItem('uploadedImage');
-  if (savedImage) {
-    const img = document.getElementById('img');
-    if (img) img.src = savedImage;
-  }
+    function togglemenuDown(element) {
+      const menu = element.querySelector('.dropdown-menu');
+      menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+      element.classList.toggle('active');
+      document.addEventListener('click', function handler(e) {
+        if (!element.contains(e.target)) {
+          menu.style.display = 'none';
+          element.classList.remove('active');
+          document.removeEventListener('click', handler);
+        }
+      });
+    }
 
-  renderMessages();
-  showTranscript();
-});
-</script>
+    function showTranscript() {
+      const transcriptMsg = document.querySelector(".Transcript-request-container");
+      const transcriptContainer = document.querySelector(".Transcript-container");
+      const studentId = localStorage.getItem("studentId");
+
+      if (transcriptContainer && transcriptMsg && studentId) {
+        transcriptContainer.addEventListener('click', function handler(e) {
+
+          transcriptMsg.style.display = 'inline-block';
+          setTimeout(function () {
+            transcriptMsg.style.display = 'none';
+          }, 2000);
+
+          fetch('http://127.0.0.1:3000/request-transcript', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ studentId })
+          })
+            .then(res => res.json())
+            .then(data => {
+              console.log("📄 Transcript request response:", data.message);
+            })
+            .catch(err => {
+              console.error("❌ Failed to request transcript:", err);
+            });
+        });
+      }
+    }
+
+    document.getElementById("feedbackForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const studentId = localStorage.getItem("studentId");
+      const name = document.getElementById("name").value;
+      const studentEmail = document.getElementById("email").value;
+      const message = document.getElementById("message").value;
+
+      const payload = { studentId, name, studentEmail, message };
+      try {
+        const res = await fetch("http://127.0.0.1:3000/submit-feedback", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        console.log("📨 Server response:", data.message);
+
+        document.getElementById("congrats-message").style.display = "block";
+
+        document.getElementById("feedbackForm").style.display = "none";
+      } catch (err) {
+        console.error("❌ Failed to submit feedback:", err);
+        alert("Something went wrong. Please try again.");
+      }
+    });
+
+    function renderMessages() {
+      console.log("renderMessages placeholder loaded");
+    }
+    renderMessages();
+    showTranscript();
+
+  </script>
 </body>
 
 </html>

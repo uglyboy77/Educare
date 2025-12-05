@@ -2,136 +2,121 @@
 <html lang="eng">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Results</title>
-    <link rel="stylesheet" href="EDUCARE/results/Resultts-page-style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Results</title>
+  <link rel="icon" type="image/png" href="../assets/EduCare Logo.png" />
+  <link rel="stylesheet" href="../results/Resultts-page-style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div class="info">
-        <h1>Results</h1>
-    </div>
-    <div class="back">
-        <a href="EDUCARE/Student-portal/Student-Portal.html">
-            <i class="fas fa-arrow-left">back </i>
-        </a>
-    </div>
+  <div class="info">
+    <h1>Results</h1>
+  </div>
+  <div class="back">
+    <a href="../Student-portal/Student-Portal.html">
+      <i class="fas fa-arrow-left">back </i>
+    </a>
+  </div>
 
-    <div class="coursesbody">
-        <p>Trail status: none</p>
-        <div class="navigator">
-            <button onclick="goPrevious()">Previous</button>
-            <span id="display">Year 1 - Semester 1</span>
-            <button onclick="goNext()">Next</button>
+  <div class="coursesbody">
+    <p id="trail-status">Trail status:</p>
+    <div class="navigator">
+      <button onclick="goPrevious()">Previous</button>
+      <span id="display">Year 1 - Semester 1</span>
+      <button onclick="goNext()">Next</button>
+    </div>
+    <div id="results-area"></div>
+    <div class="payment-link">
+      <a id="download-link" href="#">Download results <i class="fas fa-download"></i></a>
+    </div>
+  </div>
+  <script>
+    const years = ["Year 1", "Year 2", "Year 3", "Year 4"];
+    const semesters = ["Semester 1", "Semester 2"];
+    let currentYearIndex = 0;
+    let currentSemesterIndex = 0;
+    const studentId = localStorage.getItem("studentId");
+
+    async function loadResults(studentId, yearIndex, semesterIndex) {
+      const year = yearIndex + 1;
+      const semester = semesterIndex + 1;
+
+      const res = await fetch(`http://127.0.0.1:3000/results/${studentId}/${year}/${semester}`);
+      const data = await res.json();
+
+      const resultsArea = document.getElementById("results-area");
+      const trailStatus = document.getElementById("trail-status");
+
+      if (data.results.length > 0) {
+        resultsArea.innerHTML = data.results.map(result => `
+        <div class="results-container ${result.trailStatus !== 'none' ? 'trail' : ''}">
+            <div id="grade">${result.grade}</div>
+            <div id="course-name">${result.courseName}</div>
+            <div id="score">${result.score}</div>
+            <div id="lecturer">${result.lecturer}</div>
+            <div id="credit-hours">Credit-hours: ${result.creditHours}</div>
+          </a>
         </div>
-        <div id="results-area"></div>
-        <div class="payment-link">
-            <a href="#">Download results <i class="fas fa-download"></i></a>
+      `).join("");
+      } else {
+        const link = document.getElementById("download-link");
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          alert(`No results available to download for Year ${year} Semester ${semester}.`);
+        });
+        resultsArea.innerHTML = `
+        <div class="results-container">
+          <p style="text-align:center; font-size:18px; font-weight:bold; color:#999;">
+            No results available for Year ${year} Semester ${semester}.
+          </p>
         </div>
-    </div>
-    <script>
-        const resultsData = {
-            "Year 1": {
-                "Semester 1": [
-                    {
-                        grade: "A",
-                        courseName: "Introduction to Programming",
-                        score: "70%",
-                        lecturer: "Dr. Smith",
-                        creditHours: 3,
-                        link: "Coursebody.html?id=1"
-                    },
-                    {
-                        grade: "B",
-                        courseName: "Introduction to Programming",
-                        score: "65%",
-                        lecturer: "Mr. Kwame Osei",
-                        creditHours: 3,
-                        link: "Course(no).html?id=2"
-                    },
-                    // Add more courses here...
-                ],
-                "Semester 2": []
-            },
-            "Year 2": {
-                "Semester 1": [],
-                "Semester 2": []
-            },
-            "Year 3": {
-                "Semester 1": [],
-                "Semester 2": []
-            },
-            "Year 4": {
-                "Semester 1": [],
-                "Semester 2": []
-            }
-        };
-        const years = ["Year 1", "Year 2", "Year 3", "Year 4"];
-        const semesters = ["Semester 1", "Semester 2"];
-        let currentYearIndex = 0;
-        let currentSemesterIndex = 0;
+      `;
+      }
+      trailStatus.textContent = data.trailCount > 0
+        ? `Trail status: ${data.trailCount} course(s)`
+        : "Trail status: none";
+    }
 
-        function updateDisplay() {
-            const display = document.getElementById("display");
-            const resultsArea = document.getElementById("results-area");
-            const year = years[currentYearIndex];
-            const semester = semesters[currentSemesterIndex];
+    function updateDisplay() {
+      const display = document.getElementById("display");
+      const year = years[currentYearIndex];
+      const semester = semesters[currentSemesterIndex];
+      display.textContent = `${year} - ${semester}`;
+      
+      loadResults(studentId, currentYearIndex, currentSemesterIndex);
+      updateDownloadLink(studentId, currentYearIndex, currentSemesterIndex);
+    }
 
-            display.textContent = `${year} - ${semester}`;
+    function goNext() {
+      currentSemesterIndex++;
+      if (currentSemesterIndex >= semesters.length) {
+        currentSemesterIndex = 0;
+        currentYearIndex++;
+        if (currentYearIndex >= years.length) currentYearIndex = 0;
+      }
+      updateDisplay();
+    }
 
-            const results = resultsData[year]?.[semester];
+    function goPrevious() {
+      currentSemesterIndex--;
+      if (currentSemesterIndex < 0) {
+        currentSemesterIndex = semesters.length - 1;
+        currentYearIndex--;
+        if (currentYearIndex < 0) currentYearIndex = years.length - 1;
+      }
+      updateDisplay();
+    }
 
-            if (results && results.length > 0) {
-                resultsArea.innerHTML = results.map(result => `
-      <div class="results-container">
-        <a href="${result.link}" class="course-link">
-          <div id="grade">${result.grade}</div>
-          <div id="course-name">${result.courseName}</div>
-          <div id="score">${result.score}</div>
-          <div id="lecturer">${result.lecturer}</div>
-          <div id="credit-hours">Credit-hours: ${result.creditHours}</div>
-        </a>
-      </div>
-    `).join("");
-            } else {
-                resultsArea.innerHTML = `
-      <div class="results-container">
-        <p style="text-align:center; font-size:18px; font-weight:bold; color:#999;">
-          No results available for ${year} ${semester}.
-        </p>
-      </div>
-    `;
-            }
-        }
-
-        function goNext() {
-            currentSemesterIndex++;
-            if (currentSemesterIndex >= semesters.length) {
-                currentSemesterIndex = 0;
-                currentYearIndex++;
-                if (currentYearIndex >= years.length) {
-                    currentYearIndex = 0;
-                }
-            }
-            updateDisplay();
-        }
-
-        function goPrevious() {
-            currentSemesterIndex--;
-            if (currentSemesterIndex < 0) {
-                currentSemesterIndex = semesters.length - 1;
-                currentYearIndex--;
-                if (currentYearIndex < 0) {
-                    currentYearIndex = years.length - 1;
-                }
-            }
-            updateDisplay();
-        }
-
-        window.onload = updateDisplay;
-    </script>
+    function updateDownloadLink(studentId, yearIndex, semesterIndex) {
+      const year = yearIndex + 1;
+      const semester = semesterIndex + 1;
+      const link = document.getElementById("download-link");
+      link.href = `http://127.0.0.1:3000/download-results/${studentId}/${year}/${semester}`;
+    }
+    window.onload = updateDisplay;
+  </script>
 </body>
 
 </html>

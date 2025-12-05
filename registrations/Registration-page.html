@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrations</title>
-    <link rel="stylesheet" href="EDUCARE/registrations/Registrations-style.css">
+    <link rel="icon" type="image/png" href="../assets/EduCare Logo.png" />
+    <link rel="stylesheet" href="../registrations/Registrations-style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
 </head>
 </head>
@@ -15,7 +16,7 @@
         <h1>Registrations</h1>
     </div>
     <div class="back">
-        <a href="EDUCARE/Student-portal/Student-Portal.html">
+        <a href="../Student-portal/Student-Portal.html">
             <i class="fas fa-arrow-left">back </i>
         </a>
     </div>
@@ -23,9 +24,9 @@
     <div class="coursesbody">
         <div class="registration-container">
             <h3>Biometric <br> Registration</h3>
-            <div id="result"><i class="fas fa-check-circle"></i></div>
+            <div id="result"><i class="fas fa-times"></i></div>
         </div>
-        <a href="Course.html">
+        <a href="/courses/Course.html">
             <div class="registration-container">
                 <h3>Course <br> Registration</h3>
                 <div id="course-result"><i class="fas fa-times"></i></div>
@@ -38,15 +39,34 @@
         </div>
 
     </div>
-    <script src="EDUCARE/course-JS.js"></script>
+    <script src="../course-JS.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const courseIcon = document.querySelector('#course-result i');
-            const isRegistered = localStorage.getItem('courseRegistered');
+        document.addEventListener('DOMContentLoaded', async () => {
+            const studentId = localStorage.getItem('studentId');
 
-            if (isRegistered === 'true' && courseIcon) {
-                courseIcon.classList.remove('fa-times');
-                courseIcon.classList.add('fa-check-circle');
+            try {
+                const res = await fetch(`http://127.0.0.1:3000/registration-status/${studentId}`);
+                const data = await res.json();
+
+                const courseIcon = document.querySelector('#course-result i');
+                if (data.registeredCourses.length > 0) {
+                    courseIcon.classList.remove('fa-times');
+                    courseIcon.classList.add('fa-check-circle');
+                }
+
+                const medicalIcon = document.querySelector('#medical-result i');
+                if (data.medicalRegistered) {
+                    medicalIcon.classList.remove('fa-times');
+                    medicalIcon.classList.add('fa-check-circle');
+                }
+
+                const biometricIcon = document.querySelector('#result i');
+                if (data.biometricRegistered) {
+                    biometricIcon.classList.remove('fa-times');
+                    biometricIcon.classList.add('fa-check-circle');
+                }
+            } catch (err) {
+                console.error("❌ Failed to load registration status:", err);
             }
         });
     </script>

@@ -1,7 +1,7 @@
 body,
 * {
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
 .course-details {
@@ -28,7 +28,7 @@ body,
   border: 2px solid #0078d4;
   background-color: white;
   overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 #lecturer-image {
@@ -64,8 +64,8 @@ body,
   cursor: pointer;
 }
 
-#course-time:hover{
-    color: #01599c;
+#course-time:hover {
+  color: #01599c;
 }
 
 #course-note {
@@ -78,6 +78,23 @@ body,
   align-self: flex-end;
   text-align: center;
   max-width: 200px;
+}
+
+.send-message-btn {
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 10px auto;
+  display: block;
+  transition: background-color 0.3s ease;
+}
+
+.send-message-btn:hover {
+  background-color: #005fa3;
 }
 
 @media screen and (max-width: 600px) {
@@ -144,19 +161,19 @@ body,
 }
 
 .Activity-box {
-    background: linear-gradient(135deg, #ffffff, #f0f4ff);
-    border-left: 6px solid #0078d4;
-    border-radius: 12px;
-    min-width: 280px;
-    min-height: 180px;
-    margin: 20px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0, 120, 212, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    cursor: pointer;
+  background: linear-gradient(135deg, #ffffff, #f0f4ff);
+  border-left: 6px solid #0078d4;
+  border-radius: 12px;
+  min-width: 280px;
+  min-height: 180px;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 120, 212, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
 }
 
 .Activity-box:hover {
@@ -179,6 +196,7 @@ body,
 .Activity-box p strong {
   color: #0078d4;
 }
+
 .activity-badge {
   background-color: #0078d4;
   color: white;
@@ -190,21 +208,22 @@ body,
 }
 
 .no-activity-message {
-    font-size: 16px;
-    color: #555;
-    background-color: #f8f8f8;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    width: 100%;
+  font-size: 16px;
+  color: #555;
+  background-color: #f8f8f8;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 100%;
 }
 
-#course-materials a{
-    text-align: center;
-    font-size: 18px;
+#course-materials a {
+  text-align: center;
+  font-size: 18px;
 }
-#course-materials a:hover{
-   color: darkblue;
+
+#course-materials a:hover {
+  color: darkblue;
 }
 
 .calendar-container {
@@ -276,13 +295,17 @@ body,
 
 .today {
   background-color: #0078d4;
-  color:#0078d4;
+  color: #0078d4;
   font-weight: bold;
 }
 
 .event-day {
   color: #ffcc00;
   font-weight: bold;
-  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
 
+.event-day:hover {
+  background-color: #ffd633;
+  color: white;
 }

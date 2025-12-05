@@ -2,123 +2,162 @@
 <html lang="eng">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Access Lecturers</title>
-    <link rel="stylesheet" href="EDUCARE/accesslecturers/AccessLecturer-style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Access Lecturers</title>
+  <link rel="icon" type="image/png" href="../assets/EduCare Logo.png" />
+  <link rel="stylesheet" href="../accesslecturers/AccessLecturer-style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div class="info">
-        <h1>Access Lecturers</h1>
-    </div>
-    <div class="back">
-        <a href="EDUCARE/Student-portal/Student-Portal.html">
-            <i class="fas fa-arrow-left">back </i>
-        </a>
-    </div>
-    <div class="coursesbody">
-        <div class="lecturer-container"></div>
-    </div>
-    <div id="overlay"></div>
-    <div id="popupForm">
-      <div class="popUp">
-        <h2>Lecturer Evaluation</h2>
-        <div class="exit-button">
-            <i class="fas fa-times"></i>
+  <div class="info">
+    <h1>Access Lecturers</h1>
+  </div>
+  <div class="back">
+    <a href="../Student-portal/Student-Portal.html">
+      <i class="fas fa-arrow-left">back </i>
+    </a>
+  </div>
+  <div class="coursesbody">
+    <div class="lecturer-container"></div>
+  </div>
+  <div id="overlay"></div>
+  <div id="popupForm">
+    <div class="popUp">
+      <h2>Lecturer Evaluation</h2>
+      <div class="exit-button">
+        <i class="fas fa-times"></i>
+      </div>
+      <form id="evaluationForm">
+        <input type="hidden" id="studentId" value="">
+
+        <div class="form-group">
+          <label for="clarity">Was the lecturer clear in explanations?</label>
+          <select id="clarity">
+            <option>Excellent</option>
+            <option>Good</option>
+            <option>Fair</option>
+            <option>Poor</option>
+          </select>
         </div>
-        <form>
-            <div class="form-group">
-                <label for="clarity">Was the lecturer clear in explanations?</label>
-                <select id="clarity">
-                    <option>Excellent</option>
-                    <option>Good</option>
-                    <option>Fair</option>
-                    <option>Poor</option>
-                </select>
-            </div>
 
-            <div class="form-group">
-                <label for="engagement">Did the lecturer engage students?</label>
-                <select id="engagement">
-                    <option>Always</option>
-                    <option>Often</option>
-                    <option>Sometimes</option>
-                    <option>Rarely</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="feedback">Was feedback on assignments helpful?</label>
-                <select id="feedback">
-                    <option>Very Helpful</option>
-                    <option>Helpful</option>
-                    <option>Neutral</option>
-                    <option>Not Helpful</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="comments">Additional comments:</label>
-                <textarea id="comments" rows="4"></textarea>
-            </div>
-            <button type="submit">Submit</button>
-        </form>
+        <div class="form-group">
+          <label for="engagement">Did the lecturer engage students?</label>
+          <select id="engagement">
+            <option>Always</option>
+            <option>Often</option>
+            <option>Sometimes</option>
+            <option>Rarely</option>
+          </select>
         </div>
+
+        <div class="form-group">
+          <label for="feedback">Was feedback on assignments helpful?</label>
+          <select id="feedback">
+            <option>Very Helpful</option>
+            <option>Helpful</option>
+            <option>Neutral</option>
+            <option>Not Helpful</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="comments">Additional comments:</label>
+          <textarea id="comments" rows="4"></textarea>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
     </div>
+  </div>
 
-</html>
+  <script>
+    let selectedLecturer = null;
 
-<script>
+    document.getElementById("studentId").value = localStorage.getItem("studentId");
+
+    document.getElementById("evaluationForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      if (!selectedLecturer) {
+        alert("Please select a lecturer before submitting.");
+        return;
+      }
+
+      const payload = {
+        studentId: document.getElementById("studentId").value,
+        clarity: document.getElementById("clarity").value,
+        engagement: document.getElementById("engagement").value,
+        feedback: document.getElementById("feedback").value,
+        comments: document.getElementById("comments").value,
+        lecturerName: selectedLecturer.name,
+        courseName: selectedLecturer.course
+      };
+
+      await fetch("http://127.0.0.1:3000/evaluate-lecturer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      alert("Assessment submitted successfully!");
+
+      document.getElementById("popupForm").style.display = 'none';
+      document.getElementById("overlay").style.display = 'none';
+      document.getElementById("evaluationForm").reset();
+    });
+
     const lecturers = [
-        { image: "https://i.pravatar.cc/150?img=1", name: "Dr. Amina Yusuf", course: "Mathematics" },
-        { image: "https://i.pravatar.cc/150?img=2", name: "Prof. James Carter", course: "Physics" },
-        { image: "https://i.pravatar.cc/150?img=3", name: "Dr. Maria Gonzales", course: "Chemistry" },
-        { image: "https://i.pravatar.cc/150?img=4", name: "Dr. Samuel Okoro", course: "Biology" },
-        { image: "https://i.pravatar.cc/150?img=5", name: "Prof. Li Wei", course: "Computer Science" },
-        { image: "https://i.pravatar.cc/150?img=6", name: "Dr. Emma Thompson", course: "English Literature" },
-        { image: "https://i.pravatar.cc/150?img=7", name: "Dr. Ahmed El-Sayed", course: "History" },
-        { image: "https://i.pravatar.cc/150?img=8", name: "Prof. Nina Patel", course: "Economics" },
-        { image: "https://i.pravatar.cc/150?img=9", name: "Dr. Robert Mwangi", course: "Engineering" },
-        { image: "https://i.pravatar.cc/150?img=10", name: "Dr. Sophia Garcia", course: "Education Studies" }
+      { image: "https://i.pravatar.cc/150?img=1", name: "Dr. Amina Yusuf", course: "Mathematics" },
+      { image: "https://i.pravatar.cc/150?img=2", name: "Prof. James Carter", course: "Physics" },
+      { image: "https://i.pravatar.cc/150?img=3", name: "Dr. Maria Gonzales", course: "Chemistry" },
+      { image: "https://i.pravatar.cc/150?img=4", name: "Dr. Samuel Okoro", course: "Biology" },
+      { image: "https://i.pravatar.cc/150?img=5", name: "Prof. Li Wei", course: "Computer Science" },
+      { image: "https://i.pravatar.cc/150?img=6", name: "Dr. Emma Thompson", course: "English Literature" },
+      { image: "https://i.pravatar.cc/150?img=7", name: "Dr. Ahmed El-Sayed", course: "History" },
+      { image: "https://i.pravatar.cc/150?img=8", name: "Prof. Nina Patel", course: "Economics" },
+      { image: "https://i.pravatar.cc/150?img=9", name: "Dr. Robert Mwangi", course: "Engineering" },
+      { image: "https://i.pravatar.cc/150?img=10", name: "Dr. Sophia Garcia", course: "Education Studies" }
     ];
 
     const container = document.querySelector('.lecturer-container');
 
     if (container) {
-        container.innerHTML = lecturers.map(lecturer => `
-            <div class="lecturer-card">
-                <div class="image-wrapper">
-                <img src="${lecturer.image}" alt="${lecturer.name}" class="lecturer-img" />
-                </div>
-                <div class="lecturer-info">
-                <h3 class="lecturer-name">${lecturer.name}</h3>
-                <p class="lecturer-course">${lecturer.course}</p>
-                </div>
-            </div>
-            `).join('');
+      container.innerHTML = lecturers.map(lecturer => `
+      <div class="lecturer-card">
+        <div class="image-wrapper">
+          <img src="${lecturer.image}" alt="${lecturer.name}" class="lecturer-img" />
+        </div>
+        <div class="lecturer-info">
+          <h3 class="lecturer-name">${lecturer.name}</h3>
+          <p class="lecturer-course">${lecturer.course}</p>
+        </div>
+      </div>
+    `).join('');
     }
-function accessPopup() {
-    const lecturerCards = document.querySelectorAll(".lecturer-card");
-    const popUp = document.getElementById("popupForm");
-    const overlay = document.getElementById("overlay");
-    const exitButton = document.querySelector(".fa-times");
 
-    lecturerCards.forEach(card => {
+    function accessPopup() {
+      const lecturerCards = document.querySelectorAll(".lecturer-card");
+      const popUp = document.getElementById("popupForm");
+      const overlay = document.getElementById("overlay");
+      const exitButton = document.querySelector(".fa-times");
+
+      lecturerCards.forEach((card, index) => {
         card.addEventListener('click', function () {
-            popUp.style.display = 'block';
-            overlay.style.display = 'block';
+          selectedLecturer = lecturers[index]; 
+          popUp.style.display = 'block';
+          overlay.style.display = 'block';
         });
-    });
+      });
 
-    exitButton.addEventListener('click', function () {
+      exitButton.addEventListener('click', function () {
         popUp.style.display = 'none';
         overlay.style.display = 'none';
-    });
-}
+      });
+    }
+
     accessPopup();
-</script>
+  </script>
 </body>
 
 </html>

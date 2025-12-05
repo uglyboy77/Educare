@@ -1,126 +1,65 @@
-
-    const courseInfo = [
-  {
-    id: 1,
-    title: "Introduction to Programming",
-    lecturer: "Dr. Smith",
-    location: "Room 101",
-    time: ["Monday 10:00 - 12:00", "Friday 11:30am - 1:30am"],
-    status: "online class available",
-    note: "Online Class available",
-    image: "images.jpg"
-  },
-  {
-    id: 2,
-    title: "Introduction to Programming",
-    lecturer: "Mr. Kwame Osei",
-    location: "Room 101",
-    time: ["Monday 15:00 - 17:00", "Friday 11:30am - 1:30am"],
-   
-  },
-  {
-    id: 3,
-    title: "Introduction to Programming",
-    lecturer: "Dr. Smith",
-    location: "Room 101",
-    time: ["Monday 10:00 - 12:00", "Friday 11:30am - 1:30am"],
-    status: "online class available",
-    note: "Online Class available"
-  },
-  {
-    id: 4,
-    title: "Introduction to Programming",
-    lecturer: "Dr. Smith",
-    location: "Room 101",
-    time: ["Monday 10:00 - 12:00", "Friday 11:30am - 1:30am"],
-    status: "quiz available",
-    note: "Quiz in progress"
-  },
-  {
-    id: 5,
-    title: "Introduction to Programming",
-    lecturer: "Dr. Smith",
-    location: "Room 101",
-    time: ["Monday 10:00 - 12:00", "Friday 11:30am - 1:30am"],
-   
-  },
-  {
-    id: 6,
-    title: "Introduction to Programming",
-    lecturer: "Dr. Smith",
-    location: "Room 101",
-    time: ["Monday 10:00 - 12:00", "Friday 11:30am - 1:30am"],
-    status: "quiz available",
-    note: "Quiz in progress"
-  },
-  {
-    id: 7,
-    title: "Introduction to Programming",
-    lecturer: "Dr. Smith",
-    location: "Room 101",
-    time: ["Monday 10:00 - 12:00", "Friday 11:30am - 1:30am"],
-   
-  },
-  {
-    id: 8,
-    title: "Introduction to Programming",
-    lecturer: "Dr. Smith",
-    location: "Room 101",
-    time: ["Monday 10:00 - 12:00", "Friday 11:30am - 1:30am"],
-   
-  },
-  {
-    id: 9,
-    title: "Introduction to Programming",
-    lecturer: "Dr. Smith",
-    location: "Room 101",
-    time: ["Monday 10:00 - 12:00", "Friday 11:30am - 1:30am"],
-   
-  },
-  {
-    id: 10,
-    title: "Introduction to Programming",
-    lecturer: "Dr. Smith",
-    location: "Room 101",
-    time: ["Monday 10:00 - 12:00", "Friday 11:30am - 1:30am"],
-    status: "quiz available",
-    note: "Quiz in progress"
-  }
+// Computer Science Year 1
+const csY1Courses = [
+  { id: 1, courseCode: "CSC100", courseName: "Introduction to Programming", lecturer: "Mr. Smith", location: "Room 101", time: "Monday 10:00 - 12:00", status: "None", note: "" },
+  { id: 2, courseCode: "CSC101", courseName: "Data Structures I", lecturer: "Dr. Smith", location: "Room 202", time: "Tuesday 2:00pm - 4:00pm", status: "Online Class available", note: "Online Class available" },
+  { id: 3, courseCode: "CSC103", courseName: "Computer Architecture", lecturer: "Dr. Smith", location: "Lab A", time: "Wednesday 8:30am - 10:30am", status: "Online Class available", note: "Online Class available" },
+  { id: 4, courseCode: "CSC104", courseName: "Discrete Mathematics", lecturer: "Dr. Smith", location: "Lecture Hall 3", time: "Friday 11:30am - 1:30pm", status: "Quiz available", note: "Quiz in progress" }
 ];
-  
+
+// Economics Year 2
+const ecoY2Courses = [
+  { id: 5, courseCode: "ECO200", courseName: "Microeconomics II", lecturer: "Prof. Johnson", location: "Room 305", time: "Monday 10:00 - 12:00", status: "None", note: "" },
+  { id: 6, courseCode: "ECO201", courseName: "Macroeconomics II", lecturer: "Dr. Brown", location: "Room 202", time: "Tuesday 2:00pm - 4:00pm", status: "Online Class available", note: "Online Class available" },
+  { id: 7, courseCode: "ECO203", courseName: "Econometrics I", lecturer: "Dr. Brown", location: "Lab A", time: "Wednesday 8:30am - 10:30am", status: "Online Class available", note: "Online Class available" },
+  { id: 8, courseCode: "ECO204", courseName: "Development Economics", lecturer: "Dr. Brown", location: "Lecture Hall 3", time: "Friday 11:30am - 1:30pm", status: "Quiz available", note: "Quiz in progress" }
+];
+
+
 const params = new URLSearchParams(window.location.search);
 const courseId = parseInt(params.get("id"));
+const program = params.get("program");
+
+let courseInfo;
+if (courseId >= 1 && courseId <= 4) {
+  courseInfo = csY1Courses;
+} else if (courseId >= 5 && courseId <= 8) {
+  courseInfo = ecoY2Courses;
+} else {
+  document.querySelector(".course-details").innerHTML = "<p>No program selected.</p>";
+  courseInfo = [];
+}
+
 const course = courseInfo.find(c => c.id === courseId);
 
 if (course) {
-  // Populate course details
   document.getElementById("lecturer-image").src = course.image || "default.jpg";
   document.getElementById("lecturer-image").alt = course.lecturer;
-  document.getElementById("course-title").textContent = course.title;
+  document.getElementById("course-code").textContent = course.courseCode;
+  document.getElementById("course-title").textContent = course.courseName;
   document.getElementById("lecturer-name").textContent = course.lecturer;
   document.getElementById("course-location").textContent = course.location;
-  document.getElementById("course-time").innerHTML = course.time.join("<br>");
+  document.getElementById("course-time").innerHTML = course.time;
   document.getElementById("course-status").textContent = course.status || "N/A";
   document.getElementById("course-note").textContent = course.note || "";
 
   const activityArea = document.getElementById("activity-area");
 
-  // Example activities (can be empty)
-  const activities = [
-     { type: "Online Class", location: "Zoom", time: "Now" },
-    //{ type: "Online Quiz", location: "Google Classroom", time: "14:30 - 16:30" }
-  ];
+  const activities = [];
+  if (course.status.includes("Online Class")) {
+    activities.push({ type: "Online Class", location: "Zoom", time: "Now" });
+  }
+  if (course.status.includes("Quiz")) {
+    activities.push({ type: "Online Quiz", location: "Google Classroom", time: "14:30 - 16:30" });
+  }
 
   const validActivities = activities.filter(a => a.type && a.type.trim() !== "");
 
   if (validActivities.length === 0) {
-    // Update course status and note when no activities
     document.getElementById("course-status").textContent = "No activity available";
     document.getElementById("course-note").textContent = "No scheduled activity";
 
     activityArea.innerHTML = `<p class="no-activity-message">You have no activities.</p>`;
   } else {
-    // Optional: update course status based on first activity type
     document.getElementById("course-status").textContent = validActivities[0].type;
     document.getElementById("course-note").textContent = "Activity scheduled";
 
@@ -128,7 +67,7 @@ if (course) {
       const box = document.createElement("div");
       box.className = "Activity-box";
       box.innerHTML = `
-        <h2>${course.title}</h2>
+        <h2>${course.courseName}</h2>
         <p><strong>Activity:</strong> ${activity.type}</p>
         <p><strong>Location:</strong> ${activity.location}</p>
         <p><strong>Time:</strong> ${activity.time}</p>
@@ -141,7 +80,12 @@ if (course) {
   document.querySelector(".course-details").innerHTML = "<p>Course not found.</p>";
 }
 
-// Calendar logic
+const input = document.getElementById("student-message");
+const lecturerName = course.lecturer;
+input.placeholder = `Send a message to ${lecturerName}`;
+
+const form = document.getElementById("message-form");
+
 const calendarDates = document.getElementById("calendar-dates");
 const monthYear = document.getElementById("month-year");
 const prevMonthBtn = document.getElementById("prev-month");
@@ -150,9 +94,11 @@ const nextMonthBtn = document.getElementById("next-month");
 let currentDate = new Date();
 
 const schoolEvents = {
-  "2025-10-16": "Midterm Exams",
-  "2025-10-20": "Parent-Teacher Meeting",
-  "2025-10-25": "Sports Day"
+  "2025-12-25": "Christmas Holiday",
+  "2025-12-26": "Boxing Day",
+  "2025-12-31": "New Year's Eve",
+  "2026-01-01": "New Year's Day",
+  "2026-01-10": "Semester 1 Begins",
 };
 
 function renderCalendar(date) {

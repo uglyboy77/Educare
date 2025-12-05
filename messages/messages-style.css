@@ -30,20 +30,23 @@ body {
   color: #ccc;
 }
 
-.compose-panel, .message-panel {
+.compose-panel,
+.message-panel {
   max-width: 800px;
   margin: 2rem auto;
   background-color: white;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   padding: 2rem;
 }
 
-.compose-panel h2, .message-panel h2 {
+.compose-panel h2,
+.message-panel h2 {
   margin-top: 0;
 }
 
-#messageForm, #replyForm {
+#messageForm,
+#replyForm {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -58,13 +61,16 @@ body {
   border-radius: 6px;
   width: 100%;
 }
+
 #messageForm input:focus,
 #messageForm textarea:focus,
-#replyForm textarea:focus, #searchInput:focus {
-  border-color: #0078D4; 
+#replyForm textarea:focus,
+#searchInput:focus {
+  border-color: #0078D4;
   outline: none;
   box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.2);
 }
+
 #messageForm button,
 #replyForm button {
   align-self: flex-end;
@@ -76,6 +82,7 @@ body {
   font-size: 1rem;
   cursor: pointer;
 }
+
 .message-controls {
   display: flex;
   flex-wrap: wrap;
@@ -108,7 +115,8 @@ body {
   max-width: 150px;
   transition: all 1s ease;
 }
-#searchInput:focus{
+
+#searchInput:focus {
   max-width: 200px;
 }
 
@@ -140,6 +148,7 @@ body {
 .actions button:hover {
   background-color: #495057;
 }
+
 #messageForm button:hover,
 #replyForm button:hover {
   background-color: #005A9E;
@@ -180,14 +189,13 @@ body {
   color: #666;
 }
 
-/* Modal Styles */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -204,13 +212,15 @@ body {
   border-radius: 12px;
   max-width: 600px;
   width: 90%;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   position: relative;
 }
+
 .message-item.unread {
   border-left-color: #FF9800;
   background-color: #fffbe6;
 }
+
 .close-btn {
   position: absolute;
   top: 1rem;
@@ -218,6 +228,7 @@ body {
   font-size: 1.5rem;
   cursor: pointer;
 }
+
 .toast {
   position: fixed;
   bottom: 2rem;
@@ -227,7 +238,7 @@ body {
   padding: 0.8rem 1.2rem;
   border-radius: 6px;
   font-size: 0.95rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.4s ease, transform 0.4s ease;
@@ -243,7 +254,12 @@ body {
   opacity: 0;
   transform: translateY(20px);
 }
+
 .active-btn {
   background-color: #1100ff;
   color: white;
+}
+
+.hide-btn {
+  cursor: pointer;
 }

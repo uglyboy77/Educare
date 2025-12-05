@@ -11,6 +11,7 @@ body {
     height: 100vh;
 }
 
+/*
 .background-image {
     position: absolute;
     top: 0;
@@ -21,11 +22,49 @@ body {
     z-index: -1;
     opacity: 0.1;
 }
+*/
+
+.fa-camera-retro {
+    font-size: 20px;
+    margin-right: 10px;
+    color: #006eff;
+}
 
 .LogIn-container {
     max-width: 400px;
     width: 90%;
     box-sizing: border-box;
+}
+
+#course {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    width: 220px;
+    color: #006eff;
+}
+
+#course:hover {
+    background-color: rgba(255, 255, 255, 1);
+    width: 310px;
+}
+
+#course:focus {
+    outline: none;
+    border: 2px solid #006eff;
+    box-shadow: 0 0 8px rgba(0, 112, 212, 0.5);
+    border-radius: 6px;
+    width: 270px;
+}
+
+#course option {
+    color: #006eff;
+    border: none;
+    text-align: center;
 }
 
 @media (max-width: 600px) {
@@ -97,8 +136,8 @@ body {
 }
 
 .LogIn-container button:hover {
-      background: linear-gradient(to right,#1500ff,  #0078D4);
-      width: 290px;
+    background: linear-gradient(to right, #1500ff, #0078D4);
+    width: 290px;
 }
 
 .LogIn-container p {

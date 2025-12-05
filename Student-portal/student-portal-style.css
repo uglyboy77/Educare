@@ -89,6 +89,7 @@ body,
     background: #f0f0f0;
 }
 
+/*
 .badge {
   background-color: red;
   color: white;
@@ -97,6 +98,7 @@ body,
   font-size: 12px;
   margin-left: 5px;
 }
+*/
 
 .imageWrapper {
     display: flex;
@@ -128,6 +130,7 @@ body,
     border-radius: 50%;
 }
 
+/*
 .fa-camera {
     position: absolute;
     bottom: 10px;
@@ -147,7 +150,7 @@ body,
 .camera-upload:hover .fa-camera {
     background-color: rgba(0, 0, 0, 0.8);
 }
-
+*/
 .studentBody {
     background-color: white;
     display: grid;
@@ -229,16 +232,18 @@ body,
 .studentInfobox6 {
     background-color: #cfe2ff;
 }
-.Transcript-request-container{
+
+.Transcript-request-container {
     display: none;
 }
+
 .Transcript-request {
     position: fixed;
     inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.5); 
+    background: rgba(0, 0, 0, 0.5);
     z-index: 9999;
     padding: 20px;
 }
@@ -250,12 +255,13 @@ body,
     padding: 24px;
     max-width: 50%;
     width: 480px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     transform: none;
     position: relative;
     z-index: 10000;
     text-align: center;
     font-weight: 600;
+    margin: 50px auto;
 }
 
 a {

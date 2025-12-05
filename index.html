@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EDUCARE - LOG IN</title>
-    <link rel="stylesheet" href="EDUCARE/CSS.css" type="text/css">
+    <link rel="icon" type="image/png" href="../assets/EduCare Logo.png">
+    <link rel="stylesheet" href="../CSS.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 
@@ -13,45 +14,64 @@
     <div class="background">
         <div class="LogIn-container">
             <div class="logo">
-                <img src="EDUCARE/assets/EduCare Logo.png" alt="EDUCARE Logo" class="image1">
+                <img src="../assets/EduCare Logo.png" alt="EDUCARE Logo" class="image1">
             </div>
             <h1>Welcome to EDUCARE</h1>
             <h2>SIGN IN</h2>
-            <form action="EDUCARE/Student-portal/Student-Portal.html" method="post">
+            <form id="loginForm">
                 <div class="input-group">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" placeholder="Email" required />
+                    <input type="email" id="email" placeholder="Email" required />
                 </div>
                 <br><br>
                 <div class="input-group">
                     <i class="fas fa-lock"></i>
-                    <input type="password" id="password" placeholder="Password" required />
+                    <input type="password" id="password" placeholder="Password" required
+                        autocomplete="current-password" />
                     <i class="fas fa-eye toggle-password" onclick="togglePassword()"></i>
                 </div>
-
                 <br><br>
                 <button type="submit">Log In</button>
             </form>
-            <p>Don't have an account? <a href="EDUCARE/Sign-up.html">Sign Up</a></p>
-            <p><a href="/forgot-password">Forgot Password?</a></p>
-            <p><a href="/terms">Terms of Service</a></p>
-            <p><a href="/privacy">Privacy Policy</a></p>
-            <p><a href="/help">Help</a></p>
+
+            <p>Don't have an account? <a href="Sign-up.html">Sign Up</a></p>
             <footer>
                 <p>&copy; 2025 EDUCARE. All rights reserved.</p>
             </footer>
         </div>
-        <script>
-            function togglePassword() {
-                const passwordInput = document.getElementById("password");
-                const toggleIcon = document.querySelector(".toggle-password");
+    </div>
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById("password");
+            const toggleIcon = document.querySelector(".toggle-password");
+            const isVisible = passwordInput.type === "text";
+            passwordInput.type = isVisible ? "password" : "text";
+            toggleIcon.classList.toggle("fa-eye");
+            toggleIcon.classList.toggle("fa-eye-slash");
+        }
 
-                const isVisible = passwordInput.type === "text";
-                passwordInput.type = isVisible ? "password" : "text";
-                toggleIcon.classList.toggle("fa-eye");
-                toggleIcon.classList.toggle("fa-eye-slash");
-            }
-        </script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            fetch('http://localhost:3000/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(`❌ ${data.error}`);
+                    } else {
+                        localStorage.setItem("studentId", data.studentId);
+                        window.location.href = "../Student-portal/Student-Portal.html";
+                    }
+                })
+                .catch(err => console.error('❌ Login error:', err));
+        });
+    </script>
 </body>
 
 </html>

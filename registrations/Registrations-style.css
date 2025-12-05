@@ -5,9 +5,11 @@ body,
     padding: 0;
     box-sizing: border-box;
 }
-a{
+
+a {
     text-decoration: none;
 }
+
 .info {
     background-color: #1500ff;
     color: white;
@@ -16,19 +18,23 @@ a{
     width: 100%;
     position: relative;
 }
-.back{
+
+.back {
     position: absolute;
     top: 0;
     left: 3px;
     z-index: 5;
 }
-.back a{
+
+.back a {
     color: #ffffff;
 }
-.back a:hover{
+
+.back a:hover {
     cursor: pointer;
     color: #ccc;
 }
+
 .info h1 {
     margin: 35px;
     font-size: 24px;
@@ -36,6 +42,7 @@ a{
     text-transform: uppercase;
     font-weight: bold;
 }
+
 .coursesbody {
     height: 100%;
     width: 100%;
@@ -48,27 +55,33 @@ a{
     right: 0;
     z-index: 3;
 }
-.registration-container{
+
+.registration-container {
     background: linear-gradient(135deg, #ffffff, #f0f4ff);
     border-left: 6px solid #0078d4;
     border-right: 6px solid #0078d4;
     width: 100%;
     padding: 77px;
     position: relative;
-    top:79px;
+    top: 79px;
     border-radius: 12px;
     margin-top: 51px;
 }
-.registration-container h3{
+
+.registration-container h3 {
     font-size: 32px;
 }
-#result, #course-result, #medical-result{
-    position:absolute ;
+
+#result,
+#course-result,
+#medical-result {
+    position: absolute;
     right: 0;
-    top:50px;
+    top: 50px;
 }
 
-.fa-check-circle, .fa-times{
+.fa-check-circle,
+.fa-times {
     font-size: 120px;
     opacity: 0.3;
 }

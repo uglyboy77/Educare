@@ -1,9 +1,8 @@
-// DOM Elements
+
 const messageList = document.getElementById("messageList");
 const messageForm = document.getElementById("messageForm");
 const recipientInput = document.getElementById("recipientId");
 const messageText = document.getElementById("messageText");
-
 const messageModal = document.getElementById("messageModal");
 const modalSubject = document.getElementById("modalSubject");
 const modalBody = document.getElementById("modalBody");
@@ -15,102 +14,155 @@ const toast = document.getElementById("toast");
 const badge = document.getElementById("unreadCount");
 const searchInput = document.getElementById("searchInput");
 
-// Load messages from localStorage or use default
-let messages = JSON.parse(localStorage.getItem("messages")) || [
-  {
-    id: 1,
-    sender: "Admin",
-    recipientId: "student123",
-    subject: "Welcome to EDUCARE",
-    body: "Your dashboard is now active. Explore courses, results, and more.",
-    date: new Date().toLocaleDateString(),
-    unread: true,
-    hidden: false
+async function updateMessage(id, unread, hidden) {
+  try {
+    await fetch(`http://127.0.0.1:3000/update-message/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ unread, hidden })
+    });
+    renderMessages();
+  } catch (err) {
+    console.error("❌ Failed to update message:", err);
   }
-];
-
-// Render visible messages
-function renderMessages() {
-  messageList.innerHTML = "";
-  const visibleMessages = messages.filter(msg => !msg.hidden);
-
-  visibleMessages.forEach(msg => {
-    if (!msg || !msg.body || !msg.subject || !msg.sender || !msg.date) return;
-
-    const li = document.createElement("li");
-    li.className = `message-item ${msg.unread ? "unread" : ""}`;
-    li.innerHTML = `
-      <h3>${msg.subject}</h3>
-      <p>${msg.body.substring(0, 80)}...</p>
-      <span class="meta">From: ${msg.sender} • ${msg.date}</span>
-      <button onclick="event.stopPropagation(); hideMessage(${msg.id})" class="hide-btn">
-        <i class="fas fa-trash"></i> Delete
-      </button>
-    `;
-    li.onclick = () => openModal(msg);
-    messageList.appendChild(li);
-  });
-
-  updateUnreadCount();
 }
 
-// Open modal
+async function renderMessages() {
+  const studentId = localStorage.getItem("studentId");
+  try {
+    const res = await fetch(`http://127.0.0.1:3000/messages/${studentId}`);
+    const data = await res.json();
+    messageList.innerHTML = "";
+    if (!data.messages || data.messages.length === 0) {
+      messageList.innerHTML = `<li class="message-item"><p>No messages yet.</p></li>`;
+      return;
+    }
+    data.messages.forEach(msg => {
+      const li = document.createElement("li");
+      li.className = `message-item ${msg.unread ? "unread" : ""}`;
+      li.innerHTML = `
+        <h3>${msg.subject}</h3>
+        <p>${msg.body.substring(0, 80)}...</p>
+        <span class="meta">From: ${msg.studentId} • ${msg.sentAt}</span>
+      `;
+      li.onclick = () => openModal(msg);
+      messageList.appendChild(li);
+    });
+    updateUnreadCount(data.messages);
+  } catch (err) {
+    console.error("❌ Failed to load inbox:", err);
+  }
+}
+window.addEventListener("load", () => {
+  renderMessages();
+});
+
 function openModal(msg) {
   modalSubject.textContent = msg.subject;
   modalBody.textContent = msg.body;
-  modalMeta.textContent = `From: ${msg.sender} • ${msg.date}`;
+  modalMeta.textContent = `From: ${msg.studentId} • ${msg.sentAt}`;
   messageModal.classList.remove("hidden");
-
   msg.unread = false;
-  localStorage.setItem("messages", JSON.stringify(messages));
+  updateMessage(msg.id, 0, msg.hidden ? 1 : 0);
   renderMessages();
-
-  replyForm.onsubmit = function (e) {
+  replyForm.onsubmit = async function (e) {
     e.preventDefault();
     const reply = replyText.value.trim();
     if (reply) {
-      alert(`Reply sent to ${msg.sender}:/n/n${reply}`);
-      replyForm.reset();
-      messageModal.classList.add("hidden");
-      showToast("Message sent successfully!");
+      const studentId = localStorage.getItem("studentId");
+      const email = localStorage.getItem("email");
+      const replyMessage = {
+        studentId,
+        email,
+        recipientId: msg.studentId,
+        subject: "Reply",
+        body: reply
+      };
+
+      try {
+        await fetch("http://127.0.0.1:3000/send-message", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(replyMessage)
+        });
+        replyForm.reset();
+        messageModal.classList.add("hidden");
+        showToast("Reply sent successfully!");
+        renderMessages();
+      } catch (err) {
+        console.error("❌ Failed to send reply:", err);
+      }
     }
   };
 }
 
-// Close modal
+async function renderSentMessages() {
+  const studentId = localStorage.getItem("studentId");
+  try {
+    const res = await fetch(`http://127.0.0.1:3000/sent-messages/${studentId}`);
+    const data = await res.json();
+
+    messageList.innerHTML = "";
+
+    if (!data.messages || data.messages.length === 0) {
+      messageList.innerHTML = `<li class="message-item"><p>No sent messages yet.</p></li>`;
+      return;
+    }
+    data.messages.forEach(msg => {
+      const li = document.createElement("li");
+      li.className = "message-item";
+      li.innerHTML = `
+        <h3>${msg.subject}</h3>
+        <p>${msg.body.substring(0, 80)}...</p>
+        <span class="meta">To: ${msg.recipientId} • ${msg.sentAt}</span>
+      `;
+      messageList.appendChild(li);
+    });
+  } catch (err) {
+    console.error("❌ Failed to load sent messages:", err);
+  }
+}
+
 if (closeBtn) {
   closeBtn.onclick = () => {
     messageModal.classList.add("hidden");
   };
 }
 
-// Send message
 if (messageForm) {
-  messageForm.onsubmit = function (e) {
+  messageForm.onsubmit = async function (e) {
     e.preventDefault();
 
+    const studentId = localStorage.getItem("studentId");
+    const email = localStorage.getItem("email");
+    const recipientId = recipientInput.value.trim();
+    const body = messageText.value.trim();
+
     const newMessage = {
-      id: messages.length + 1,
-      sender: "You",
-      recipientId: recipientInput.value.trim(),
+      studentId,
+      email,
+      recipientId,
       subject: "New Message",
-      body: messageText.value.trim(),
-      date: new Date().toLocaleDateString(),
-      unread: true,
-      hidden: false
+      body
     };
 
-    if (newMessage.recipientId && newMessage.body) {
-      messages.unshift(newMessage);
-      localStorage.setItem("messages", JSON.stringify(messages));
+    try {
+      const res = await fetch("http://127.0.0.1:3000/send-message", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newMessage)
+      });
+      const data = await res.json();
+      console.log("📨 DB response:", data.message);
+
       messageForm.reset();
-      renderMessages();
       showToast("Message sent successfully!");
+    } catch (err) {
+      console.error("❌ Failed to send message:", err);
     }
   };
 }
 
-// Toast
 function showToast(message) {
   if (!toast) return;
   toast.textContent = message;
@@ -120,85 +172,142 @@ function showToast(message) {
   setTimeout(() => {
     toast.classList.remove("visible");
     toast.classList.add("hidden");
-  }, 3000);
+  }, 10000);
 }
 
-// Badge
-function updateUnreadCount() {
-  if (!badge) return;
-  const count = messages.filter(msg => msg.unread && !msg.hidden).length;
-  badge.textContent = count;
-  badge.style.display = count > 0 ? "inline-block" : "none";
-}
+/* async function searchMessages() {
+  const query = searchInput.value.toLowerCase();
+  const studentId = localStorage.getItem("studentId");
 
-// Hide message
-function hideMessage(id) {
-  const msg = messages.find(m => m.id === id);
-  if (msg) {
-    msg.hidden = true;
-    localStorage.setItem("messages", JSON.stringify(messages));
-    renderMessages();
-    showToast("Message deleted.");
+  try {
+    // Fetch inbox and sent messages in parallel
+    const [inboxRes, sentRes] = await Promise.all([
+      fetch(`http://127.0.0.1:3000/messages/${studentId}`),
+      fetch(`http://127.0.0.1:3000/sent-messages/${studentId}`)
+    ]);
+
+    const inboxData = await inboxRes.json();
+    const sentData = await sentRes.json();
+
+    // Merge both arrays
+    const allMessages = [
+      ...(inboxData.messages || []),
+      ...(sentData.messages || [])
+    ];
+
+    // Filter by query
+    const filtered = allMessages.filter(msg =>
+      !msg.hidden &&
+      (
+        msg.subject.toLowerCase().includes(query) ||
+        msg.body.toLowerCase().includes(query) ||
+        (msg.studentId && msg.studentId.toLowerCase().includes(query)) ||
+        (msg.recipientId && msg.recipientId.toLowerCase().includes(query))
+      )
+    );
+
+    renderFilteredMessages(filtered);
+  } catch (err) {
+    console.error("❌ Search failed:", err);
   }
+} */
+
+
+/*
+function updateUnreadCount(messages) {
+ const badge = document.getElementById("unreadCount");
+ if (!badge) return;
+ const count = messages.filter(msg => msg.unread && !msg.hidden).length;
+ badge.textContent = count;
+ badge.style.display = count > 0 ? "inline-block" : "none";
+} 
+*/
+
+/*
+function hideMessage(id) {
+  updateMessage(id, 0, 1);
+  showToast("Message deleted.");
+ 
 }
 
 // Unhide message
 function unhideMessage(id) {
-  const msg = messages.find(m => m.id === id);
-  if (msg) {
-    msg.hidden = false;
-    localStorage.setItem("messages", JSON.stringify(messages));
-    renderMessages();
-    showToast("Message recovred.");
+  updateMessage(id, 0, 0); 
+  showToast("Message recovered.");
+ 
+}
+// Delete sent message
+function deleteSentMessage(id) {
+  updateMessage(id, 0, 1); 
+  showToast("Sent message deleted.");   
+}
+*/
+
+/*
+async function showHiddenMessages() {
+  const studentId = localStorage.getItem("studentId");
+  try {
+    const res = await fetch(`http://127.0.0.1:3000/messages/${studentId}`);
+    const data = await res.json();
+
+    const hiddenMessages = data.messages.filter(msg => msg.hidden);
+
+    messageList.innerHTML = "";
+
+    if (hiddenMessages.length === 0) {
+      messageList.innerHTML = `<li class="message-item"><p>No Deleted messages.</p></li>`;
+      return;
+    }
+
+    hiddenMessages.forEach(msg => {
+      const li = document.createElement("li");
+      li.className = "message-item hidden-msg";
+      li.innerHTML = `
+        <h3>${msg.subject}</h3>
+        <p>${msg.body.substring(0, 80)}...</p>
+        <span class="meta">From: ${msg.studentId} • ${msg.sentAt}</span>
+        <button onclick="unhideMessage(${msg.id})" class="hide-btn">
+          <i class="fas fa-trash-restore"></i> Recover
+        </button>
+      `;
+      messageList.appendChild(li);
+    });
+  } catch (err) {
+    console.error("❌ Failed to load hidden messages:", err);
   }
 }
+*/
 
-// Show hidden messages
-function showHiddenMessages() {
-  messageList.innerHTML = "";
-
-  const hiddenMessages = messages.filter(msg => msg.hidden);
-
-  if (hiddenMessages.length === 0) {
-    messageList.innerHTML = `<li class="message-item"><p>No Deleted messages.</p></li>`;
-    return;
-  }
-
-  hiddenMessages.forEach(msg => {
-    const li = document.createElement("li");
-    li.className = "message-item hidden-msg";
-    li.innerHTML = `
-      <h3>${msg.subject}</h3>
-      <p>${msg.body.substring(0, 80)}...</p>
-      <span class="meta">From: ${msg.sender} • ${msg.date}</span>
-      <button onclick="unhideMessage(${msg.id})" class="hide-btn"><i class="fas fa-trash-restore"></i> Recover</button>
-    `;
-    messageList.appendChild(li);
-  });
-}
-
-// Mark all as read
 function markAllAsRead() {
-  messages.forEach(msg => {
-    if (!msg.hidden) msg.unread = false;
-  });
-  localStorage.setItem("messages", JSON.stringify(messages));
-  renderMessages();
-  showToast("All messages marked as read.");
+  const studentId = localStorage.getItem("studentId");
+  fetch(`http://127.0.0.1:3000/messages/${studentId}`)
+    .then(res => res.json())
+    .then(data => {
+      data.messages.forEach(msg => {
+        if (!msg.hidden) updateMessage(msg.id, 0, msg.hidden ? 1 : 0);
+      });
+      showToast("All messages marked as read.");
+    });
 }
 
-// Search messages
+
 function searchMessages() {
   const query = searchInput.value.toLowerCase();
-  const filtered = messages.filter(msg =>
-    !msg.hidden &&
-    (msg.subject.toLowerCase().includes(query) ||
-     msg.body.toLowerCase().includes(query) ||
-     msg.sender.toLowerCase().includes(query))
-  );
-
-  renderFilteredMessages(filtered);
+  const studentId = localStorage.getItem("studentId");
+  fetch(`http://127.0.0.1:3000/messages/${studentId}`)
+    .then(res => res.json())
+    .then(data => {
+      const filtered = data.messages.filter(msg =>
+        !msg.hidden &&
+        (msg.subject.toLowerCase().includes(query) ||
+          msg.body.toLowerCase().includes(query) ||
+          msg.studentId.toLowerCase().includes(query))
+      );
+      renderFilteredMessages(filtered);
+    })
+    .catch(err => console.error("❌ Search failed:", err));
 }
+
 
 function renderFilteredMessages(filteredMessages) {
   messageList.innerHTML = "";
@@ -214,38 +323,42 @@ function renderFilteredMessages(filteredMessages) {
     li.innerHTML = `
       <h3>${msg.subject}</h3>
       <p>${msg.body.substring(0, 80)}...</p>
-      <span class="meta">From: ${msg.sender} • ${msg.date}</span>
-      <button onclick="hideMessage(${msg.id})" class="hide-btn"><i class="fas fa-trash"></i>Delete</button>
+      <span class="meta">From: ${msg.studentId} • ${msg.sentAt}</span>
     `;
     li.onclick = () => openModal(msg);
     messageList.appendChild(li);
   });
 }
 
-// Initialize
 window.addEventListener("load", () => {
-  messages = JSON.parse(localStorage.getItem("messages")) || messages;
   renderMessages();
 });
 
-const showHiddenBtn = document.getElementById("showHiddenBtn");
+// const showHiddenBtn = document.getElementById("showHiddenBtn");
 const inboxBtn = document.getElementById("inboxBtn");
 
-// Highlight active button
 function setActiveButton(activeBtn) {
-  [showHiddenBtn, inboxBtn].forEach(btn => btn.classList.remove("active-btn"));
+  [inboxBtn, sentBtn].forEach(btn => btn.classList.remove("active-btn"));
   activeBtn.classList.add("active-btn");
 }
 
-// Show hidden messages
+const sentBtn = document.getElementById("sentBtn");
+
+if (sentBtn) {
+  sentBtn.onclick = () => {
+    renderSentMessages();
+    setActiveButton(sentBtn);
+  };
+}
+/*
 if (showHiddenBtn) {
   showHiddenBtn.onclick = () => {
     showHiddenMessages();
     setActiveButton(showHiddenBtn);
   };
 }
+*/
 
-// Show inbox (visible messages)
 if (inboxBtn) {
   inboxBtn.onclick = () => {
     renderMessages();

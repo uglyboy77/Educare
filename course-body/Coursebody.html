@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course</title>
-    <link rel="stylesheet" href="EDUCARE/course-body/Course-style.css">
+    <link rel="icon" type="image/png" href="../assets/EduCare Logo.png" />
+    <link rel="stylesheet" href="../course-body/Course-style.css">
 </head>
 
 <body>
@@ -13,18 +14,24 @@
         <h2 id="course-title"></h2>
         <div class="image-wrapper"><img id="lecturer-image" alt="lecturer photo"></div>
         <p><strong>Lecturer:</strong> <span id="lecturer-name"></span></p>
+        <p><strong>Course Code:</strong> <span id="course-code"></span></p>
         <p><strong>Location:</strong> <span id="course-location"></span></p>
         <p><strong>Time:</strong> <span id="course-time"></span></p>
         <p><strong>Activity:</strong> <span id="course-status"></span></p>
         <p id="course-note"></p>
     </div>
-    <textarea id="student-message" name="message-to-lecturer" placeholder="Send a Message" required
-        class="message-textarea"></textarea>
+
+    <form id="message-form" action="#" method="post">
+        <textarea id="student-message" name="message-to-lecturer" required class="message-textarea"></textarea>
+        <button id="send-message-btn" class="send-message-btn" type="submit">Send Message</button>
+    </form>
 
     <div class="Activity-area" id="activity-area"></div>
-    
+
     <div id="course-materials">
-        <a href="#"> <h5>access course materials</h5></a>
+        <a href="#">
+            <h5>access course materials</h5>
+        </a>
     </div>
 
     <div class="calendar-container">

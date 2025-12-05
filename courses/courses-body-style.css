@@ -5,9 +5,11 @@ body,
     padding: 0;
     box-sizing: border-box;
 }
-a{
+
+a {
     text-decoration: none;
 }
+
 .info {
     background-color: #1500ff;
     color: white;
@@ -16,19 +18,23 @@ a{
     width: 100%;
     position: relative;
 }
-.back{
+
+.back {
     position: absolute;
     top: 0;
     left: 3px;
     z-index: 5;
 }
-.back a{
+
+.back a {
     color: #ffffff;
 }
-.back a:hover{
+
+.back a:hover {
     cursor: pointer;
     color: #ccc;
 }
+
 .info h1 {
     margin: 35px;
     font-size: 24px;
@@ -70,13 +76,14 @@ a{
     z-index: 2;
     border-radius: 0px 12px 12px 0;
 }
-    
+
 @media screen and (max-width: 600px) {
     .coursebox {
         width: 40%;
         height: auto;
         margin-left: 22px;
     }
+
     .coursebox p:nth-child(1) {
         font-size: 12px;
     }
@@ -123,14 +130,18 @@ a{
     background-color: white;
     border: solid 2px white;
 }
-.indication:hover span, .indication1:hover span{
-    display: inline-block;
+
+.indication:hover span,
+.indication1:hover span {
+    display: block;
 }
-.indication span, .indication1 span{
+
+.indication span,
+.indication1 span {
     background-color: white;
     font-size: 10px;
     position: relative;
-    top:0;
+    top: 0;
     right: 110px;
     display: none;
     font-weight: 700;

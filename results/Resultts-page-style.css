@@ -79,6 +79,7 @@ p {
     left: 10px;
     top: 75px;
     opacity: 0.3;
+    color: #1500ff;
 }
 
 #course-name {
@@ -86,6 +87,7 @@ p {
     font-size: 20px;
     right: 10px;
     font-weight: 600;
+    color: #1500ff;
 }
 
 #score {
@@ -95,18 +97,35 @@ p {
     left: 35%;
     opacity: 0.1;
     font-weight: 800;
+    color: #1500ff;
+}
+
+.results-container.trail {
+    border-left: 6px solid red;
+    border-right: 6px solid red;
+    color: red;
+}
+
+.results-container.trail #grade,
+.results-container.trail #course-name,
+.results-container.trail #score,
+.results-container.trail #lecturer,
+.results-container.trail #credit-hours {
+    color: red;
 }
 
 #lecturer {
     position: absolute;
     right: 10px;
     top: 0;
+    color: #1500ff;
 }
 
 #credit-hours {
     position: absolute;
     right: 10px;
     bottom: 10px;
+    color: #1500ff;
 }
 
 .navigator {
