@@ -6,8 +6,13 @@ const PDFDocument = require('pdfkit');
 const fs = require('fs');
 const multer = require('multer');
 
-app.use(cors());
 const app = express();
+app.use(cors());
+app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.send('EDUCARE backend is running ✅');
+});
 
 const storage = multer.diskStorage({
   destination: path.join(__dirname, "uploads"),
@@ -20,7 +25,6 @@ const upload = multer({ storage: storage });
 console.log("🚀 EDUCARE backend starting...");
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
 app.use((req, res, next) => {
   console.log("Incoming Origin:", req.headers.origin);
   next();
@@ -666,10 +670,6 @@ app.post('/submit-feedback', (req, res) => {
     console.error("❌ Failed to submit feedback:", err);
     res.status(500).json({ error: "Database error submitting feedback" });
   }
-});
-
-app.get('/', (req, res) => {
-  res.send('EDUCARE backend is running ✅');
 });
 
 app.get('/favicon.ico', (req, res) => {
