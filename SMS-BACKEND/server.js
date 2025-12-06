@@ -19,11 +19,6 @@ const upload = multer({ storage: storage });
 console.log("🚀 EDUCARE backend starting...");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-
-app.use(express.static(path.join(__dirname, '../EDUCARE')));
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
 app.use(cors({
   origin: [
     'http://localhost:5500',
@@ -33,6 +28,11 @@ app.use(cors({
   methods: ['GET','POST','PUT','DELETE'],
   credentials: true
 }));
+const PORT = process.env.PORT || 3000;
+
+app.use(express.static(path.join(__dirname, '../EDUCARE')));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 app.use(express.json());
 
 let db;
