@@ -41,6 +41,8 @@
         </div>
     </div>
     <script>
+        const API_BASE = "https://educare-student-hub.onrender.com";
+
         function togglePassword() {
             const passwordInput = document.getElementById("password");
             const toggleIcon = document.querySelector(".toggle-password");
@@ -55,7 +57,7 @@
 
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-            fetch('http://localhost:3000/login', {
+            fetch('${API_BASE}/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
