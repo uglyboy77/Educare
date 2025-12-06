@@ -19,7 +19,7 @@ const upload = multer({ storage: storage });
 console.log("🚀 EDUCARE backend starting...");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, '../EDUCARE')));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
@@ -671,8 +671,6 @@ app.post('/submit-feedback', (req, res) => {
     res.status(500).json({ error: "Database error submitting feedback" });
   }
 });
-
-const PORT = process.env.PORT || 3000;
 
 app.use((req, res) => {
   console.log("❌ Unmatched route:", req.method, req.originalUrl);
