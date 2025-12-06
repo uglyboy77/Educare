@@ -365,7 +365,7 @@ app.get('/course/:id', (req, res) => {
   }
 });
 
-app.post("/api/signup", upload.single("image"), (req, res) => {
+app.post("/signup", upload.single("image"), (req, res) => {
   const { studentId, firstName, middleName, lastName, email, phoneNumber, password, course } = req.body;
 
   try {
@@ -410,7 +410,7 @@ app.post('/login', (req, res) => {
 });
 
 
-app.get('/api/student-info/:id', (req, res) => {
+app.get('/student-info/:id', (req, res) => {
   const studentId = req.params.id;
   try {
     const student = db.prepare('SELECT firstName, lastName, image FROM students WHERE studentId = ?').get(studentId);
