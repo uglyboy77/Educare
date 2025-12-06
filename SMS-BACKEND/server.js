@@ -6,16 +6,8 @@ const PDFDocument = require('pdfkit');
 const fs = require('fs');
 const multer = require('multer');
 
+app.use(cors());
 const app = express();
-app.use(cors({
-  origin: [
-    'http://localhost:5500',
-    'http://127.0.0.1:5500',
-    'https://educare-seven-eta.vercel.app'
-  ],
-  methods: ['GET','POST','PUT','DELETE'],
-  credentials: true
-}));
 
 const storage = multer.diskStorage({
   destination: path.join(__dirname, "uploads"),
