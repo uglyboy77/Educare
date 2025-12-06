@@ -6,18 +6,6 @@ const PDFDocument = require('pdfkit');
 const fs = require('fs');
 const multer = require('multer');
 
-
-const storage = multer.diskStorage({
-  destination: path.join(__dirname, "uploads"),
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
-  }
-});
-
-const upload = multer({ storage: storage });
-
-console.log("🚀 EDUCARE backend starting...");
-
 const app = express();
 app.use(cors({
   origin: [
@@ -28,12 +16,23 @@ app.use(cors({
   methods: ['GET','POST','PUT','DELETE'],
   credentials: true
 }));
+
+const storage = multer.diskStorage({
+  destination: path.join(__dirname, "uploads"),
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ storage: storage });
+console.log("🚀 EDUCARE backend starting...");
 const PORT = process.env.PORT || 3000;
 
-app.use(express.static(path.join(__dirname, '../EDUCARE')));
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
 app.use(express.json());
+app.use((req, res, next) => {
+  console.log("Incoming Origin:", req.headers.origin);
+  next();
+});
 
 let db;
 try {
@@ -427,7 +426,6 @@ app.get('/student-info/:id', (req, res) => {
   }
 });
 
-
 app.post('/request-transcript', (req, res) => {
   const { studentId } = req.body;
   console.log("Incoming transcript request body:", req.body);
@@ -685,6 +683,8 @@ app.get('/', (req, res) => {
 app.get('/favicon.ico', (req, res) => {
   res.status(204).end();
 });
+app.use(express.static(path.join(__dirname, '../EDUCARE')));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use((req, res) => {
   console.log("❌ Unmatched route:", req.method, req.originalUrl);
