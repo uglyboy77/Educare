@@ -122,35 +122,30 @@
         formData.append("image", profilePicture);
       }
 
-      fetch(`${API_BASE}/signup`, {
-        method: 'POST',
-        body: formData
-      })
-        .then(async res => {
-          const data = await res.json();
-
-          if (!res.ok) {
-            if (res.status === 409) {
-              alert("❌ You already have an account with this email. Redirecting to login...");
-              window.location.href = "../index.html";
-            } else {
-              alert(`❌ Signup failed: ${data.error}`);
-            }
-            throw new Error(data.error);
-          }
-
-          console.log(data.message);
-          localStorage.setItem("studentId", formData.get("studentId"));
-
-          return fetch(`http://localhost:3000/student-info/${formData.get("studentId")}`);
-        })
-        .then(res => res.json())
-        .then(data => {
-          window.location.href = "../Student-portal/Student-Portal.html";
-        })
-        .catch(err => console.error('❌ Signup error:', err));
-    });
+fetch(`${API_BASE}/api/signup`, { method: 'POST', body: formData })
+  .then(async res => {
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      if (res.status === 409) {
+        alert("❌ You already have an account with this email. Redirecting to login...");
+        window.location.href = "../index.html";
+      } else {
+        alert(`❌ Signup failed: ${data.error || "Unknown error"}`);
+      }
+      throw new Error(data.error || `Request failed with status ${res.status}`);
+    }
+    return res.json();
+  })
+  .then(data => {
+    console.log(data.message);
+    localStorage.setItem("studentId", formData.get("studentId"));
+    return fetch(`${API_BASE}/student-info/${formData.get("studentId")}`);
+  })
+  .then(res => res.json())
+  .then(data => {
+    window.location.href = "../Student-portal/Student-Portal.html";
+  })
+  .catch(err => console.error("❌ Signup error:", err.message));
   </script>
 </body>
-
 </html>
