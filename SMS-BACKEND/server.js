@@ -672,10 +672,12 @@ app.post('/submit-feedback', (req, res) => {
   }
 });
 
+const PORT = process.env.PORT || 3000;
+
 app.use((req, res) => {
   console.log("❌ Unmatched route:", req.method, req.originalUrl);
   res.status(404).send(`Route not found: ${req.originalUrl}`);
 });
-app.listen(PORT, '127.0.0.1', () => {
-  console.log(`✅ Server is listening on http://127.0.0.1:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅ Server is listening on http://0.0.0.0:${PORT}`);
 });
