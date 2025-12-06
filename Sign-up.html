@@ -122,7 +122,7 @@
         formData.append("image", profilePicture);
       }
 
-fetch(`${API_BASE}/api/signup`, { method: 'POST', body: formData })
+fetch(`${API_BASE}/signup`, { method: 'POST', body: formData })
   .then(async res => {
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
