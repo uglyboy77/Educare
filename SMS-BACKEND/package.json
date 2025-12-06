@@ -20,4 +20,7 @@
     "pdfkit": "^0.17.2"
   },
   "description": ""
+},
+"engines": {
+  "node": "20.x"
 }
