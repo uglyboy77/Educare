@@ -31,7 +31,7 @@ app.use(express.json());
 
 let db;
 try {
-  db = new Database('educare.db');
+  db = new Database('./SMS-BACKEND/educare.db');
 } catch (err) {
   console.error("❌ Failed to connect to database:", err);
   process.exit(1);
@@ -71,7 +71,20 @@ if (!hasIdColumn) {
   )`).run();
 }
 
-db.prepare('DROP TABLE IF EXISTS courses;').run();
+db.prepare(`
+  CREATE TABLE IF NOT EXISTS courses  (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    studentId TEXT,
+    courseCode TEXT,
+    courseName TEXT,
+    lecturer TEXT,
+    location TEXT,
+    time TEXT,
+    status TEXT,
+    note TEXT,
+    UNIQUE(studentId, courseCode)
+  )
+`).run();
 
 const csY1Courses = [
   { code: "CSC100", name: "Introduction to Programming", lecturer: "Mr. Smith", room: "Room 101", time: "Monday 10:00 - 12:00", status: "None", note: "" },
@@ -122,21 +135,6 @@ function insertCourses(studentId) {
     );
   });
 }
-
-db.prepare(`
-  CREATE TABLE IF NOT EXISTS courses  (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    studentId TEXT,
-    courseCode TEXT,
-    courseName TEXT,
-    lecturer TEXT,
-    location TEXT,
-    time TEXT,
-    status TEXT,
-    note TEXT,
-    UNIQUE(studentId, courseCode)
-  )
-`).run();
 
 const students = db.prepare('SELECT studentId FROM students').all();
 students.forEach(student => {
