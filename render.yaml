@@ -3,6 +3,6 @@ services:
     name: sms-backend
     env: node
     buildCommand: cd SMS-BACKEND && npm install
-    startCommand: node server.js
+    startCommand: cd SMS-BACKEND && node server.js
     envVars:
       NODE_VERSION: 20
