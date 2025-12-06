@@ -672,6 +672,14 @@ app.post('/submit-feedback', (req, res) => {
   }
 });
 
+app.get('/', (req, res) => {
+  res.send('EDUCARE backend is running ✅');
+});
+
+app.get('/favicon.ico', (req, res) => {
+  res.status(204).end();
+});
+
 app.use((req, res) => {
   console.log("❌ Unmatched route:", req.method, req.originalUrl);
   res.status(404).send(`Route not found: ${req.originalUrl}`);
