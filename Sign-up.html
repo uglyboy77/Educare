@@ -73,6 +73,8 @@
   </div>
 
   <script>
+    const API_BASE = "https://educare-student-hub.onrender.com";
+    
     function togglePassword() {
       const passwordInput = document.getElementById("password");
       const toggleIcon = document.querySelector(".toggle-password");
@@ -120,7 +122,7 @@
         formData.append("image", profilePicture);
       }
 
-      fetch('http://localhost:3000/signup', {
+      fetch(`${API_BASE}/signup`, {
         method: 'POST',
         body: formData
       })
