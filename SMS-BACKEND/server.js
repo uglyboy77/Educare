@@ -239,7 +239,15 @@ db.prepare(`CREATE TABLE IF NOT EXISTS feedback (
   submittedAt DATETIME DEFAULT CURRENT_TIMESTAMP
 )`).run();
 
-
+app.get("/debug-db", async (req, res) => {
+  try {
+    const rows = await db.all("SELECT * FROM students");
+    res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch students" });
+  }
+});
 
 app.get('/dashboard/:studentId', (req, res) => {
   const studentId = req.params.studentId;
