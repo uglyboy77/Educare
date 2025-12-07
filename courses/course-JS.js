@@ -1,3 +1,5 @@
+const API_BASE = "https://educare-students-hub-eadz.onrender.com";
+
 document.addEventListener("DOMContentLoaded", () => {
   const studentId = localStorage.getItem("studentId");
   const courseContainer = document.querySelector(".coursecontainer");
@@ -7,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  fetch(`http://127.0.0.1:3000/courses/${studentId}`)
+  fetch(`${API_BASE}/courses/${studentId}`)
     .then(res => res.json())
     .then(data => {
       courseContainer.innerHTML = "";
