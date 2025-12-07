@@ -1,3 +1,4 @@
+const API_BASE = "https://educare-students-hub-eadz.onrender.com";
 
 const messageList = document.getElementById("messageList");
 const messageForm = document.getElementById("messageForm");
@@ -16,7 +17,7 @@ const searchInput = document.getElementById("searchInput");
 
 async function updateMessage(id, unread, hidden) {
   try {
-    await fetch(`http://127.0.0.1:3000/update-message/${id}`, {
+    await fetch(`${API_BASE}/update-message/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ unread, hidden })
@@ -30,7 +31,7 @@ async function updateMessage(id, unread, hidden) {
 async function renderMessages() {
   const studentId = localStorage.getItem("studentId");
   try {
-    const res = await fetch(`http://127.0.0.1:3000/messages/${studentId}`);
+    const res = await fetch(`${API_BASE}/messages/${studentId}`);
     const data = await res.json();
     messageList.innerHTML = "";
     if (!data.messages || data.messages.length === 0) {
@@ -80,7 +81,7 @@ function openModal(msg) {
       };
 
       try {
-        await fetch("http://127.0.0.1:3000/send-message", {
+        await fetch(`${API_BASE}/send-message`,{
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(replyMessage)
@@ -99,7 +100,7 @@ function openModal(msg) {
 async function renderSentMessages() {
   const studentId = localStorage.getItem("studentId");
   try {
-    const res = await fetch(`http://127.0.0.1:3000/sent-messages/${studentId}`);
+    const res = await fetch(`${API_BASE}/sent-messages/${studentId}`);
     const data = await res.json();
 
     messageList.innerHTML = "";
@@ -147,7 +148,7 @@ if (messageForm) {
     };
 
     try {
-      const res = await fetch("http://127.0.0.1:3000/send-message", {
+      const res = await fetch(`${API_BASE}/send-message`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newMessage)
@@ -280,7 +281,7 @@ async function showHiddenMessages() {
 
 function markAllAsRead() {
   const studentId = localStorage.getItem("studentId");
-  fetch(`http://127.0.0.1:3000/messages/${studentId}`)
+  fetch(`${API_BASE}/messages/${studentId}`)
     .then(res => res.json())
     .then(data => {
       data.messages.forEach(msg => {
@@ -294,7 +295,7 @@ function markAllAsRead() {
 function searchMessages() {
   const query = searchInput.value.toLowerCase();
   const studentId = localStorage.getItem("studentId");
-  fetch(`http://127.0.0.1:3000/messages/${studentId}`)
+  fetch(`${API_BASE}/messages/${studentId}`)
     .then(res => res.json())
     .then(data => {
       const filtered = data.messages.filter(msg =>
