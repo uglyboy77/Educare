@@ -3,7 +3,7 @@ const API_BASE = "https://educare-students-hub-eadz.onrender.com";
 let dashboardData = null;
 
 async function loadDashboard(studentId) {
-  const res = await fetch(`${API-BASE}/dashboard/${studentId}`);
+  const res = await fetch(`${API_BASE}/dashboard/${studentId}`);
   dashboardData = await res.json();
 
   document.getElementById("student-course").textContent = `Course: ${dashboardData.student.course}`;
