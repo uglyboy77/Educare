@@ -72,6 +72,8 @@
   </div>
 
   <script>
+    const API_BASE = "https://educare-students-hub-eadz.onrender.com";
+    
     let selectedLecturer = null;
 
     document.getElementById("studentId").value = localStorage.getItem("studentId");
@@ -94,7 +96,7 @@
         courseName: selectedLecturer.course
       };
 
-      await fetch("http://127.0.0.1:3000/evaluate-lecturer", {
+      await fetch(`${API_BASE}/evaluate-lecturer`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
