@@ -41,11 +41,13 @@
     </div>
     <script src="../course-JS.js"></script>
     <script>
+        const API_BASE = "https://educare-students-hub-eadz.onrender.com";
+        
         document.addEventListener('DOMContentLoaded', async () => {
             const studentId = localStorage.getItem('studentId');
 
             try {
-                const res = await fetch(`http://127.0.0.1:3000/registration-status/${studentId}`);
+                const res = await fetch(`${API_BASE}/registration-status/${studentId}`);
                 const data = await res.json();
 
                 const courseIcon = document.querySelector('#course-result i');
