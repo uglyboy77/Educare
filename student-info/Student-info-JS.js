@@ -1,8 +1,9 @@
+const API_BASE = "https://educare-students-hub-eadz.onrender.com";
 
 let dashboardData = null;
 
 async function loadDashboard(studentId) {
-  const res = await fetch(`http://127.0.0.1:3000/dashboard/${studentId}`);
+  const res = await fetch(`${API-BASE}/dashboard/${studentId}`);
   dashboardData = await res.json();
 
   document.getElementById("student-course").textContent = `Course: ${dashboardData.student.course}`;
@@ -10,8 +11,8 @@ async function loadDashboard(studentId) {
   document.getElementById("student-id").textContent = `ID: ${dashboardData.student.studentId}`;
 
   if (dashboardData.student.image) {
-    document.getElementById("student-image").src = `http://127.0.0.1:3000${dashboardData.student.image}`;
-    document.querySelector(".student-background").style.backgroundImage = `url('http://127.0.0.1:3000${dashboardData.student.image}')`;
+    document.getElementById("student-image").src = `${API_BASE}${dashboardData.student.image}`;
+    document.querySelector(".student-background").style.backgroundImage = `url('${API_BASE}${dashboardData.student.image}')`;
   } else {
     document.getElementById("student-image").removeAttribute("src");
     document.getElementById("student-image").alt = "No photo uploaded";
