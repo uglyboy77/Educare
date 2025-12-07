@@ -30,6 +30,8 @@
 
   </div>
   <script>
+    const API_BASE = "https://educare-students-hub-eadz.onrender.com";
+    
     const years = ["Year 1", "Year 2"];
     const semesters = ["Semester 1 and 2"];
     let currentYearIndex = 0;
@@ -58,7 +60,7 @@
 
       try {
         const studentId = localStorage.getItem("studentId");
-        const res = await fetch(`http://127.0.0.1:3000/student-bills/${studentId}`);
+        const res = await fetch(`${API_BASE}/student-bills/${studentId}`);
         const data = await res.json();
 
         if (data.items) {
