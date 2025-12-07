@@ -123,12 +123,14 @@
   </section>
   <!-- <script src="messages/messages-js.js"></script> -->
   <script>
-
+    
+    const API_BASE = "https://educare-students-hub-eadz.onrender.com";
+    
     window.addEventListener("load", () => {
       const studentId = localStorage.getItem("studentId");
       if (!studentId) return;
 
-      fetch(`http://localhost:3000/student-info/${studentId}`)
+      fetch(`${API_BASE}/student-info/${studentId}`)
         .then(res => res.json())
         .then(data => {
           document.getElementById("student-name").textContent = `Hello, ${data.name}`;
