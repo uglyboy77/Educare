@@ -135,7 +135,7 @@
         .then(data => {
           document.getElementById("student-name").textContent = `Hello, ${data.name}`;
           if (data.image) {
-            document.getElementById("img").src = `http://localhost:3000${data.image}`;
+            document.getElementById("img").src = `${API_BASE}${data.image}`;
           } else {
             document.getElementById("img").removeAttribute("src");
             document.getElementById("img").alt = "No photo uploaded";
