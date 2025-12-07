@@ -33,6 +33,8 @@
     </div>
   </div>
   <script>
+    const API_BASE = "https://educare-students-hub-eadz.onrender.com";
+    
     const years = ["Year 1", "Year 2", "Year 3", "Year 4"];
     const semesters = ["Semester 1", "Semester 2"];
     let currentYearIndex = 0;
@@ -43,7 +45,7 @@
       const year = yearIndex + 1;
       const semester = semesterIndex + 1;
 
-      const res = await fetch(`http://127.0.0.1:3000/results/${studentId}/${year}/${semester}`);
+      const res = await fetch(`${API_BASE}/results/${studentId}/${year}/${semester}`);
       const data = await res.json();
 
       const resultsArea = document.getElementById("results-area");
@@ -113,7 +115,7 @@
       const year = yearIndex + 1;
       const semester = semesterIndex + 1;
       const link = document.getElementById("download-link");
-      link.href = `http://127.0.0.1:3000/download-results/${studentId}/${year}/${semester}`;
+      link.href = `${API_BASE}/download-results/${studentId}/${year}/${semester}`;
     }
     window.onload = updateDisplay;
   </script>
