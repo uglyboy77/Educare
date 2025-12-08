@@ -156,6 +156,17 @@ body,
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
+@media (max-width:600px) {
+.studentInfobox1,
+.studentInfobox2,
+.studentInfobox3,
+.studentInfobox4,
+.studentInfobox5,
+.studentInfobox6{
+        position:relative;
+        margin: 50px auto;
+    }
+}
 
 .studentInfobox1,
 .studentInfobox2,
@@ -412,6 +423,12 @@ a {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+@media (max-width:600px){
+    .sendMessage {
+        padding: 30px;
+        width:60%;
+    }    
 }
 
 .sendMessage input {
