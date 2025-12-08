@@ -155,17 +155,9 @@ body,
     background-color: white;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-}
-@media (max-width:600px) {
-.studentInfobox1,
-.studentInfobox2,
-.studentInfobox3,
-.studentInfobox4,
-.studentInfobox5,
-.studentInfobox6{
-        position:relative;
-        margin: 50px auto;
-    }
+    justify-items: center;  
+    align-items: start;
+    gap:20px;
 }
 
 .studentInfobox1,
@@ -183,7 +175,6 @@ body,
     border-radius: 12px;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-left: 10px;
     transition: all 0.3s ease;
     margin-top: 20px;
     z-index: 2;
